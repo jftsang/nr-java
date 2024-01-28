@@ -24,7 +24,7 @@ public class Static {
         for (j = 1; j < nd + 1; j++)
             pd[j] = 0.0;
         for (i = nc - 1; i >= 0; i--) {
-            nnd = (nd < (nc - i) ? nd : nc - i);
+            nnd = (Math.min(nd, (nc - i)));
             for (j = nnd; j > 0; j--)
                 pd[j] = pd[j] * x + pd[j - 1];
             pd[0] = pd[0] * x + c[i];

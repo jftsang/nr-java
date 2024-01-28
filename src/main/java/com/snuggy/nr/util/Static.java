@@ -16,7 +16,7 @@ public class Static {
     // double& d --> final double[] d (d[0])
     // double* p --> final double[] p_arr, int p_off (p_arr[p_off])
 
-    public static final double[][] mat_ident(int n) {
+    public static double[][] mat_ident(int n) {
         final double[][] r;
         r = new double[n][n];
         for (int i = 0; i < n; i++)
@@ -24,7 +24,7 @@ public class Static {
         return r;
     }
 
-    public static final int[] times(final int[][] a, final int[] b) {
+    public static int[] times(final int[][] a, final int[] b) {
         int m = a.length;
         final int[] r = new int[m];
         for (int i = 0; i < m; i++) {
@@ -36,7 +36,7 @@ public class Static {
         return r;
     }
 
-    public static final double[] times(final double[][] a, final double[] b) {
+    public static double[] times(final double[][] a, final double[] b) {
         int m = a.length;
         final double[] r = new double[m];
         for (int i = 0; i < m; i++) {
@@ -48,7 +48,7 @@ public class Static {
         return r;
     }
 
-    public static final double[][] mat_times(final double[][] a, final double[][] b) throws NRException {
+    public static double[][] mat_times(final double[][] a, final double[][] b) throws NRException {
         int m = a.length;
         int n = b[0].length;
         int l = a[0].length;
@@ -65,7 +65,7 @@ public class Static {
         return r;
     }
 
-    public static final double[][] transpose(final double[][] a) {
+    public static double[][] transpose(final double[][] a) {
         int m = a.length;
         int n = a[0].length;
         final double[][] r = new double[n][m];
@@ -84,14 +84,13 @@ public class Static {
     }
 
     @SuppressWarnings("unchecked")
-    public static <T> T[] obj_vec(Class<T> type, final T[] a) throws InstantiationException, IllegalAccessException {
+    public static <T> T[] obj_vec(Class<T> type, final T[] a) {
         T[] arr = (T[]) Array.newInstance(type, a.length);
-        for (int i = 0; i < a.length; i++)
-            arr[i] = a[i];
+        System.arraycopy(a, 0, arr, 0, a.length);
         return arr;
     }
 
-    public static <T> T[] obj_vec_nulls(Class<T> type, int n) throws InstantiationException, IllegalAccessException {
+    public static <T> T[] obj_vec_nulls(Class<T> type, int n) {
         @SuppressWarnings("unchecked")
         T[] arr = (T[]) Array.newInstance(type, n);
         for (int i = 0; i < n; i++)
@@ -103,23 +102,23 @@ public class Static {
         return new boolean[n];
     }
 
-    public static final int[] int_vec(int n) {
+    public static int[] int_vec(int n) {
         return new int[n];
     }
 
-    public static final int[][] int_mat(int m, int n) {
+    public static int[][] int_mat(int m, int n) {
         return new int[m][n];
     }
 
-    public static final double[] doub_vec(int n) {
+    public static double[] doub_vec(int n) {
         return new double[n];
     }
 
-    public static final double[][] doub_mat(int n, int m) {
+    public static double[][] doub_mat(int n, int m) {
         return new double[n][m];
     }
 
-    public static final double[][] doub_mat(int n, int m, double x) {
+    public static double[][] doub_mat(int n, int m, double x) {
         final double[][] r = new double[n][m];
         for (int i = 0; i < n; i++)
             for (int j = 0; j < m; j++)
@@ -127,7 +126,7 @@ public class Static {
         return r;
     }
 
-    public static final double[][] doub_mat(int n, int m, final double[] x) throws NRException {
+    public static double[][] doub_mat(int n, int m, final double[] x) throws NRException {
         if (x.length != n * m)
             throw new NRException("x.length != n * m");
         final double[][] r = new double[n][m];
@@ -138,7 +137,7 @@ public class Static {
         return r;
     }
 
-    public static final double[] doub_vec(int n, double x) {
+    public static double[] doub_vec(int n, double x) {
         final double[] r = new double[n];
         for (int i = 0; i < n; i++)
             r[i] = x;
@@ -215,19 +214,19 @@ public class Static {
     }
 
     public static int MIN(final int a, final int b) {
-        return (a < b ? a : b);
+        return (Math.min(a, b));
     }
 
     public static int MAX(final int a, final int b) {
-        return (a > b ? a : b);
+        return (Math.max(a, b));
     }
 
     public static double MIN(final double a, final double b) {
-        return (a < b ? a : b);
+        return (Math.min(a, b));
     }
 
     public static double MAX(final double a, final double b) {
-        return (a > b ? a : b);
+        return (Math.max(a, b));
     }
 
     public static double SQR(final double a) {
@@ -238,7 +237,7 @@ public class Static {
         return a * a;
     }
 
-    public static final double[][] doub_mat(final double[][] m) {
+    public static double[][] doub_mat(final double[][] m) {
         final double[][] r = new double[m.length][];
         for (int i = 0; i < m.length; i++) {
             r[i] = new double[m[i].length];
@@ -247,7 +246,7 @@ public class Static {
         return r;
     }
 
-    public static final int[][] int_mat(final int[][] m) {
+    public static int[][] int_mat(final int[][] m) {
         final int[][] r = new int[m.length][];
         for (int i = 0; i < m.length; i++) {
             r[i] = new int[m[i].length];
@@ -256,21 +255,20 @@ public class Static {
         return r;
     }
 
-    public static final int[] int_vec(final int n, final int x) {
+    public static int[] int_vec(final int n, final int x) {
         final int[] r = new int[n];
         for (int i = 0; i < n; i++)
             r[i] = x;
         return r;
     }
 
-    public static final int[] int_vec(final int n, final int[] from, final int offset) {
+    public static int[] int_vec(final int n, final int[] from, final int offset) {
         final int[] r = new int[n];
-        for (int i = 0; i < n; i++)
-            r[i] = from[offset + i];
+        System.arraycopy(from, offset + 0, r, 0, n);
         return r;
     }
 
-    public static final int[][] int_mat(final int m, final int n, final int[] a) {
+    public static int[][] int_mat(final int m, final int n, final int[] a) {
         final int[][] r = new int[m][n];
         int p = 0;
         for (int i = 0; i < m; i++)
@@ -279,13 +277,13 @@ public class Static {
         return r;
     }
 
-    public static final double[] doub_vec(final double[] a) {
+    public static double[] doub_vec(final double[] a) {
         final double[] r = new double[a.length];
         System.arraycopy(a, 0, r, 0, a.length);
         return r;
     }
 
-    public static final int[] int_vec(final int[] a) {
+    public static int[] int_vec(final int[] a) {
         final int[] r = new int[a.length];
         System.arraycopy(a, 0, r, 0, a.length);
         return r;
@@ -336,7 +334,7 @@ public class Static {
         return r;
     }
 
-    public static final double[] vec_minus(final double[] a, final double[] b) throws NRException {
+    public static double[] vec_minus(final double[] a, final double[] b) throws NRException {
         if (a == null || b == null || a.length != b.length)
             throw new NRException("a == null || b == null || a.length != b.length");
         final double[] r = new double[a.length];
@@ -345,7 +343,7 @@ public class Static {
         return r;
     }
 
-    public static final int[] vec_minus(final int[] a, final int[] b) throws NRException {
+    public static int[] vec_minus(final int[] a, final int[] b) throws NRException {
         if (a == null || b == null || a.length != b.length)
             throw new NRException("a == null || b == null || a.length != b.length");
         final int[] r = new int[a.length];
@@ -354,7 +352,7 @@ public class Static {
         return r;
     }
 
-    public static final double[] vec_plus(final double[] a, final double[] b) throws NRException {
+    public static double[] vec_plus(final double[] a, final double[] b) throws NRException {
         if (a == null || b == null || a.length != b.length)
             throw new NRException("a == null || b == null || a.length != b.length");
         final double[] r = new double[a.length];
@@ -363,7 +361,7 @@ public class Static {
         return r;
     }
 
-    public static final double[][] mat_minus(final double[][] a, final double[][] b) throws NRException {
+    public static double[][] mat_minus(final double[][] a, final double[][] b) throws NRException {
         int i, j, m = a.length, n = a[0].length;
         if (a.length != b.length || a[0].length != b[0].length)
             throw new NRException("a.length != b.length || a[0].length != b[0].length");
@@ -375,7 +373,7 @@ public class Static {
         return c;
     }
 
-    public static final double[][] mat_plus(final double[][] a, final double[][] b) throws NRException {
+    public static double[][] mat_plus(final double[][] a, final double[][] b) throws NRException {
         int i, j, m = a.length, n = a[0].length;
         if (a.length != b.length || a[0].length != b[0].length)
             throw new NRException("a.length != b.length || a[0].length != b[0].length");
@@ -387,12 +385,12 @@ public class Static {
         return c;
     }
     
-    public static long umod(long x, int m) throws NRException {
+    public static long umod(long x, int m) {
         long r = ((x % m) + m) % m;
         return r;
     }
     
-    public static int umod(int x, int m) throws NRException {
+    public static int umod(int x, int m) {
         int r = ((x % m) + m) % m;
         return r;
     }

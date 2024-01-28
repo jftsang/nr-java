@@ -46,8 +46,8 @@ public class Dbrent extends Bracketmethod {
         $double fv = $(0.0), fw = $(0.0), fx = $(0.0);
         // Comments following will point out only differences from the routine
         // in Brent. Read that routine first.
-        a = (ax.$() < cx.$() ? ax.$() : cx.$());
-        b = (ax.$() > cx.$() ? ax.$() : cx.$());
+        a = (Math.min(ax.$(), cx.$()));
+        b = (Math.max(ax.$(), cx.$()));
         $(x, $(w, $(v, bx)));
         $(fw, $(fv, $(fx, funcd.applyAsDouble(x.$()))));
         $(dw, $(dv, $(dx, funcd.df(x.$())))); // All our housekeeping chores are doubled

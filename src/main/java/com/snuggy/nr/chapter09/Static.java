@@ -61,7 +61,7 @@ public class Static {
                 p = abs(p);
                 double min1 = 3.0 * xm * q - abs(tol1 * q);
                 double min2 = abs(e * q);
-                if (2.0 * p < (min1 < min2 ? min1 : min2)) {
+                if (2.0 * p < (Math.min(min1, min2))) {
                     e = d; // Accept interpolation.
                     d = p / q;
                 } else {
@@ -845,8 +845,8 @@ public class Static {
         $double f = $(0.0);
         double[] g = doub_vec(n), p = doub_vec(n), xold = doub_vec(n);
         double[][] fjac = doub_mat(n, n);
-        NRfmin<T> fmin = new NRfmin<T>(vecfunc); // Set up NRfmin object.
-        NRfdjac<T> fdjac = new NRfdjac<T>(vecfunc); // Set up NRfdjac object.
+        NRfmin<T> fmin = new NRfmin<>(vecfunc); // Set up NRfmin object.
+        NRfdjac<T> fdjac = new NRfdjac<>(vecfunc); // Set up NRfdjac object.
         $double1d fvec = fmin.fvec(); // Make an alias to simplify coding.
         f.$(fmin.eval(x)); // fvec is also computed by this call.
         test = 0.0; // Test for initial guess being a root. Use
@@ -939,8 +939,8 @@ public class Static {
         $double f = $(0.0);
         double[] fvcold = doub_vec(n), g = doub_vec(n), p = doub_vec(n), s = doub_vec(n), t = doub_vec(n), w = doub_vec(n), xold = doub_vec(n);
         QRdcmp qr = null;
-        NRfmin<T> fmin = new NRfmin<T>(vecfunc); // Set up NRfmin object.
-        NRfdjac<T> fdjac = new NRfdjac<T>(vecfunc); // Set up NRfdjac object.
+        NRfmin<T> fmin = new NRfmin<>(vecfunc); // Set up NRfmin object.
+        NRfdjac<T> fdjac = new NRfdjac<>(vecfunc); // Set up NRfdjac object.
         $double1d fvec = fmin.fvec(); // Make an alias to simplify coding.
         f.$(fmin.eval(x)); // The vector fvec is also computed by this
         test = 0.0; // call.

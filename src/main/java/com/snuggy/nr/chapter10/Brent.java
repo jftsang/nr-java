@@ -52,10 +52,10 @@ public class Brent extends Bracketmethod {
         double xm;
         double e = 0.0; // This will be the distance moved on
         // the step before last.
-        a = (ax.$() < cx.$() ? ax.$() : cx.$()); // a and b must be
+        a = (Math.min(ax.$(), cx.$())); // a and b must be
                                                              // in ascending
                                                              // order,
-        b = (ax.$() > cx.$() ? ax.$() : cx.$()); // but input
+        b = (Math.max(ax.$(), cx.$())); // but input
                                                              // abscissas need
                                                              // not be.
         $(x, $(w, $(v, bx))); // Initializations...
