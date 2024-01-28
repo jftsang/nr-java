@@ -20,7 +20,7 @@ public class Static {
         long i, ia, ib, iswap, itmph = 0, itmpl = 0;
         for (i = 0; i < NITER; i++) {
             // Perform niter iterations of DES logic, using a simpler
-            // (noncryptographic) nonlinear function instead of DES’s.
+            // (noncryptographic) nonlinear function instead of DES's.
             ia = (iswap = rword.$()) ^ c1[(int) i]; // The bit-rich constants
                                                        // c1 and (below)
             // c2 guarantee lots of nonlinear mixing.
@@ -158,14 +158,14 @@ public class Static {
 
     public static void sobseq(final int n, final double[] x) throws NRException {
         // When n is negative, internally initializes a set of MAXBIT direction
-        // numbers for each of MAXDIM different Sobol’ sequences. When n is
+        // numbers for each of MAXDIM different Sobol' sequences. When n is
         // positive (but MAXDIM), returns as the vector x[0..n-1] the next
         // values from n of these sequences. (n must not be changed between
         // initializations.)
         int j, k, l;
         int i, im, ipp;
 
-        if (n < 0) { // Initialize, don’t return a vector.
+        if (n < 0) { // Initialize, don't return a vector.
             for (k = 0; k < MAXDIM; k++)
                 ix[k] = 0;
             in = 0;

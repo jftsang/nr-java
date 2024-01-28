@@ -10,7 +10,7 @@ import com.snuggy.nr.util.*;
 
 public class Laplace_interp extends Linbcg {
 
-    // Object for interpolating missing data in a matrix by solving Laplace’s
+    // Object for interpolating missing data in a matrix by solving Laplace's
     // equation. Call constructor once, then solve one or more times (see text).
 
     private final double[][] mat;

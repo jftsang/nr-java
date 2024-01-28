@@ -53,7 +53,7 @@ public class KSdist {
                 yp = y;
                 logy = log(y);
                 ff = f / SQR(1. + pow(y, 4) + pow(y, 12));
-                u = (y * logy - ff) / (1. + logy); // Newton’s method
+                u = (y * logy - ff) / (1. + logy); // Newton's method
                                                    // correction.
                 y = y - (t = u / MAX(0.5, 1. - 0.5 * u / (y * (1. + logy)))); // Halley.
             } while (abs(t / y) > 1.e-15);

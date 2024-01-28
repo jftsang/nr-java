@@ -39,13 +39,13 @@ public class Beta extends Gauleg18 {
 
     public double betacf(final double a, final double b, final double x) {
         // Evaluates continued fraction for incomplete beta function by
-        // modified Lentz’s method (5.2). User should not call directly.
+        // modified Lentz's method (5.2). User should not call directly.
         int m, m2;
         double aa, c, d, del, h, qab, qam, qap;
-        qab = a + b; // These q’s will be used in factors that
+        qab = a + b; // These q's will be used in factors that
         qap = a + 1.0; // occur in the coefficients (6.4.6).
         qam = a - 1.0;
-        c = 1.0; // First step of Lentz’s method.
+        c = 1.0; // First step of Lentz's method.
         d = 1.0 - qab * x / qap;
         if (abs(d) < FPMIN)
             d = FPMIN;

@@ -20,8 +20,8 @@ public class Bandec {
     // Doub det(); Return determinant of A.
 
     // The constructor takes as arguments the compactly stored matrix A, and
-    // the integers m1 and m2. (One could of course define a “band-diagonal
-    // matrix object” to encapsulate these quantities, but in this brief
+    // the integers m1 and m2. (One could of course define a 'band-diagonal
+    // matrix object' to encapsulate these quantities, but in this brief
     // treatment we want to keep things simple.)
 
     public Bandec(final double[][] a, final int mm1, final int mm2) {

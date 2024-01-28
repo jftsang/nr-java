@@ -80,7 +80,7 @@ public class Static {
     private static boolean factrl_init = true;
 
     public static double factrl(final int n) throws NRException {
-        // Returns the value nä as a floating-point number.
+        // Returns the value n' as a floating-point number.
         if (factrl_init) {
             factrl_init = false;
             factrl_a[0] = 1.;
@@ -97,7 +97,7 @@ public class Static {
     private static boolean factln_init = true;
 
     public static double factln(final int n) throws NRException {
-        // Returns ln.nä/.
+        // Returns ln.n'/.
         if (factln_init) {
             factln_init = false;
             for (int i = 0; i < NTOP; i++)
@@ -134,7 +134,7 @@ public class Static {
     public static double expint(final int n, final double x) throws NRException {
         // Evaluates the exponential integral En.x/.
         // Here MAXIT is the maximum allowed number of iterations; EULER
-        // is Eulerís constant ; EPS is the desired relative error, not
+        // is Euler's constant ; EPS is the desired relative error, not
         // smaller than the machine precision; BIG is a number near the
         // largest representable floating-point number.
         int i, ii, nm1 = n - 1;
@@ -147,7 +147,7 @@ public class Static {
             if (x == 0.0)
                 ans = 1.0 / nm1; // Another special case.
             else {
-                if (x > 1.0) { // Lentzís algorithm (5.2).
+                if (x > 1.0) { // Lentz's algorithm (5.2).
                     b = x + n;
                     c = expint_BIG;
                     d = 1.0 / b;
@@ -198,7 +198,7 @@ public class Static {
     public static double ei(final double x) throws NRException {
         // Computes the exponential integral Ei.x/ for x > 0.
         // Here MAXIT is the maximum number of iterations allowed; EULER
-        // is Eulerís constant ; EPS is the relative error, or absolute
+        // is Euler's constant ; EPS is the relative error, or absolute
         // error near the zero of Ei at x D 0:3725; FPMIN is a number close
         // to the smallest representable floating-point number.
         int k;
@@ -309,7 +309,7 @@ public class Static {
                 throw new NRException("series failed in frenel");
             cs = complex(sumc, sums);
         } else { // Evaluate continued fraction by modified
-            pix2 = frenel_PI * ax * ax; // Lentzís method (5.2).
+            pix2 = frenel_PI * ax * ax; // Lentz's method (5.2).
             b = complex(1.0, -pix2);
             cc = complex(frenel_BIG);
             // d=h=1.0/b;
@@ -351,7 +351,7 @@ public class Static {
             cisi_FPMIN = Double.MIN_VALUE * 4.0, // numeric_limits<Doub>::min()*4.0,
             cisi_BIG = Double.MAX_VALUE * cisi_EPS; // numeric_limits<Doub>::max()*EPS;
 
-    // Here EULER is Eulerís constant ; PIBY2 is =2; TMIN is the dividing
+    // Here EULER is Euler's constant ; PIBY2 is =2; TMIN is the dividing
     // line between using the series and continued fraction; EPS is the
     // relative error, or absolute error near a zero of Ci.x/;
     // FPMIN is a number close to the smallest representable floating-point
@@ -370,7 +370,7 @@ public class Static {
         if ((t = abs(x)) == 0.0)
             return complex(-cisi_BIG); // Special case.
         if (t > cisi_TMIN) { // Evaluate continued fraction by modified
-            b = complex(1.0, t); // Lentzís method (5.2).
+            b = complex(1.0, t); // Lentz's method (5.2).
             c = complex(cisi_BIG, 0.0);
             // d=h=1.0/b;
             d = h = divide(1.0, b);
@@ -437,7 +437,7 @@ public class Static {
     private static final double H = 0.4, A1 = 2.0 / 3.0, A2 = 0.4, A3 = 2.0 / 7.0;
 
     public static double dawson(final double x) {
-        // Returns Dawsonís integral F.x/ D exp.x2/
+        // Returns Dawson's integral F.x/ D exp.x2/
         // R x
         // 0 exp.t2/dt for any real x.
         int i, n0; // Flag is true if we need to initialize, else false.
@@ -495,7 +495,7 @@ public class Static {
             rf_BIG = 0.2 * Double.MAX_VALUE; // numeric_limits<Doub>::max();
 
     public static double rf(final double x, final double y, final double z) throws NRException {
-        // Computes Carlsonís elliptic integral of the first kind,
+        // Computes Carlson's elliptic integral of the first kind,
         // RF .x; y; z/. x, y, and z must be nonnegative, and at most one
         // can be zero.
         double alamb, ave, delx, dely, delz, e2, e3, sqrtx, sqrty, sqrtz, xt, yt, zt;
@@ -533,7 +533,7 @@ public class Static {
             * pow(Double.MIN_VALUE/* numeric_limits<Doub>::min() */, -2. / 3.);
 
     public static double rd(final double x, final double y, final double z) throws NRException {
-        // Computes Carlsonís elliptic integral of the second kind, RD.x;
+        // Computes Carlson's elliptic integral of the second kind, RD.x;
         // y; z/. x and y must be nonnegative, and at most one can be zero.
         // z must be positive.
         double alamb, ave, delx, dely, delz, ea, eb, ec, ed, ee, fac, sqrtx, sqrty, sqrtz, sum, xt, yt, zt;
@@ -587,7 +587,7 @@ public class Static {
                                                                                            */, 1. / 3.);
 
     public static double rj(final double x, final double y, final double z, final double p) throws NRException {
-        // Computes Carlsonís elliptic integral of the third kind,
+        // Computes Carlson's elliptic integral of the third kind,
         // RJ .x; y; z;p/. x, y, and z must be nonnegative, and at most one
         // can be zero. p must be nonzero. If p < 0, the Cauchy principal value
         // is returned.
@@ -655,7 +655,7 @@ public class Static {
             rc_COMP1 = 2.236 / sqrt(rc_TINY), rc_COMP2 = SQR(rc_TINY * rc_BIG) / 25.0;
 
     public static double rc(final double x, final double y) throws NRException {
-        // Computes Carlsonís degenerate elliptic integral, RC .x; y/. x
+        // Computes Carlson's degenerate elliptic integral, RC .x; y/. x
         // must be nonnegative and y must be nonzero. If y < 0, the Cauchy
         // principal value is returned.
         double alamb, ave, s, w, xt, yt;
@@ -683,7 +683,7 @@ public class Static {
 
     public static double ellf(final double phi, final double ak) throws NRException {
         // Legendre elliptic integral of the first kind F.;k/, evaluated
-        // using Carlsonís function RF. The argument ranges are 0    =2, 0 
+        // using Carlson's function RF. The argument ranges are 0    =2, 0 
         // k sin   1.
         double s = sin(phi);
         return s * rf(SQR(cos(phi)), (1.0 - s * ak) * (1.0 + s * ak), 1.0);
@@ -691,7 +691,7 @@ public class Static {
 
     public static double elle(final double phi, final double ak) throws NRException {
         // Legendre elliptic integral of the second kind E.;k/, evaluated
-        // using Carlsonís functions RD and RF . The argument ranges
+        // using Carlson's functions RD and RF . The argument ranges
         // are 0    =2, 0  k sin   1.
         double cc, q, s;
         s = sin(phi);
@@ -701,8 +701,8 @@ public class Static {
     }
 
     public static double ellpi(final double phi, final double en, final double ak) throws NRException {
-        // Legendre elliptic integral of the third kind Ö.; n; k/, evaluated
-        // using Carlsonís functions RJ and RF . (Note that the sign convention
+        // Legendre elliptic integral of the third kind '.; n; k/, evaluated
+        // using Carlson's functions RJ and RF . (Note that the sign convention
         // on n is opposite that of Abramowitz and Stegun.)
         // The ranges of  and k are 0    =2, 0  k sin   1.
         double cc, enss, q, s;

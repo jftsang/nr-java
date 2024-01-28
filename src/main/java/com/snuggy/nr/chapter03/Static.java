@@ -37,7 +37,7 @@ public class Static {
             for (k = n - 1; k > 0; k--)
                 // The quantity phi D
                 // Q
-                // j�k.xj  xk/ is found as a
+                // j'k.xj  xk/ is found as a
                 phi = k * s[k] + x[j] * phi; // derivative of P.xj /.
             ff = y[j] / phi;
             b = 1.0; // Coefficients of polynomials in each term of the
@@ -169,7 +169,7 @@ public class Static {
         int i;
         double t, u, d1 = x1u - x1l, d2 = x2u - x2l;
         final double[][] c = doub_mat(4, 4);
-        bcucof(y, y1, y2, y12, d1, d2, c); // Get the c�s.
+        bcucof(y, y1, y2, y12, d1, d2, c); // Get the c's.
         if (x1u == x1l || x2u == x2l)
             throw new NRException("Bad input in routine bcuint");
         t = (x1 - x1l) / d1; // Equation (3.6.4).

@@ -60,8 +60,8 @@ public abstract class Linbcg {
             r.$()[j] = b[j] - r.$()[j];
             rr[j] = r.$()[j];
         }
-        // atimes(r,rr,0); Uncomment this line to get the “minimum resid
-        if (itol == 1) { // ual” variant of the algorithm.
+        // atimes(r,rr,0); Uncomment this line to get the 'minimum resid
+        if (itol == 1) { // ual' variant of the algorithm.
             bnrm = snrm(b, itol);
             asolve(r.$(), z.$(), 0); // Input to asolve is r[0..n-1], output is
                              // z[0..n-1];

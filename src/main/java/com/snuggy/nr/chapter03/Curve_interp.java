@@ -24,7 +24,7 @@ public class Curve_interp {
             throws NRException, InstantiationException, IllegalAccessException {
         // Constructor. The n  dim matrix ptsin inputs the data points. Input
         // close as 0 for an open curve, 1 for a closed curve. (For a closed
-        // curve, the last data point should not duplicate the first — the
+        // curve, the last data point should not duplicate the first ' the
         // algorithm will connect them.)
 
         n = (nrows(ptsin));

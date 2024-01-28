@@ -35,10 +35,10 @@ public class ADAT {
         nvals = 0; // First pass determines number of nonzeros.
         for (j = 0; j < m; j++) { // Outer loop over columns of AT in AAT .
             for (i = AT.col_ptr()[j]; i < AT.col_ptr()[j + 1]; i++) {
-                k = AT.row_ind()[i]; // AT kj ¤ 0. Find column k in first
+                k = AT.row_ind()[i]; // AT kj ' 0. Find column k in first
                                      // matrix, A.
                 for (l = A.col_ptr()[k]; l < A.col_ptr()[k + 1]; l++) {
-                    h = A.row_ind()[l]; // Ahl ¤ 0.
+                    h = A.row_ind()[l]; // Ahl ' 0.
                     if (done[h] != j) { // Test if contribution already
                                         // included.
                         done[h] = j;

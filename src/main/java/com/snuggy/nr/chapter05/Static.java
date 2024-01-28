@@ -65,7 +65,7 @@ public class Static {
 
     public static <T extends Func_Doub_To_Doub> double dfridr(T func, final double x, final double h,
             final $double err) throws NRException {
-        // Returns the derivative of a function func at a point x by Ridders’
+        // Returns the derivative of a function func at a point x by Ridders'
         // method of polynomial extrapolation. The value h is input as an
         // estimated initial stepsize; it need not be small, but rather should
         // be an increment in x over which func changes substantially. An
@@ -145,7 +145,7 @@ public class Static {
 
     public static Ratfn pade(final double[] cof) throws NRException {
         // Given cof[0..2*n], the leading terms in the power series expansion
-        // of a function, solve the linear Pad´e equations to return a Ratfn
+        // of a function, solve the linear Pad'e equations to return a Ratfn
         // object that embodies a diagonal rational function approximation to
         // the same function.
         @SuppressWarnings("unused")
@@ -215,7 +215,7 @@ public class Static {
         }
         e = 0.0;
         for (it = 0; it < MAXIT; it++) { // Loop over iterations.
-            for (i = 0; i < npt; i++) { // Set up the “design matrix” for the
+            for (i = 0; i < npt; i++) { // Set up the 'design matrix' for the
                                         // least-squares
                 power = wt[i]; // fit.
                 bb[i] = power * (fs[i] + SIGN(e, ee[i]));

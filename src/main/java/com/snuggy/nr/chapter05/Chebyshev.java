@@ -88,7 +88,7 @@ public class Chebyshev implements Func_Doub_To_Doub, ByValue<Chebyshev> {
         // kD0 ckTk.y/ 
         // c0=2, where y and x are related by (5.8.10). This routine is
         // intended to be called with moderately large n (e.g., 30 or 50),
-        // the array of c’s subsequently to be truncated at the smaller value
+        // the array of c's subsequently to be truncated at the smaller value
         // m such that cm and subsequent elements are negligible.
         n = (nn);
         m = (nn);
@@ -126,7 +126,7 @@ public class Chebyshev implements Func_Doub_To_Doub, ByValue<Chebyshev> {
         if ((x - a) * (x - b) > 0.0)
             throw new NRException("x not in range in Chebyshev::eval");
         y2 = 2.0 * (y = (2.0 * x - a - b) / (b - a)); // Change of variable.
-        for (j = m - 1; j > 0; j--) { // Clenshaw’s recurrence.
+        for (j = m - 1; j > 0; j--) { // Clenshaw's recurrence.
             sv = d;
             d = y2 * d - dd + c[j];
             dd = sv;
@@ -178,7 +178,7 @@ public class Chebyshev implements Func_Doub_To_Doub, ByValue<Chebyshev> {
         // Pn-1
         // kD0 dkyk D
         // Pn-1
-        // kD0 ckTk.y/  c0=2. The method is Clenshaw’s recurrence (5.8.11),
+        // kD0 ckTk.y/  c0=2. The method is Clenshaw's recurrence (5.8.11),
         // but now applied algebraically rather than arithmetically.
         int k, j;
         double sv;

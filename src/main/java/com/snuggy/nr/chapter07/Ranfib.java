@@ -5,7 +5,7 @@ import static com.snuggy.nr.util.Static.*;
 
 public class Ranfib {
 
-    // Implements Knuth’s subtractive generator using only floating operations.
+    // Implements Knuth's subtractive generator using only floating operations.
     // See text for cautions.
     private final double[] dtab = doub_vec(55);
     private double dd;

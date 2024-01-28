@@ -8,7 +8,7 @@ import com.snuggy.nr.util.*;
 
 public abstract class StepperBase implements IStepperBase {
     
-    // The Odeint object doesn�t know in advance which specific stepper object
+    // The Odeint object doesn't know in advance which specific stepper object
     // it will be instantiated with. It does, however, rely on the fact that
     // the stepper object will be derived from, and thus have the methods in,
     // this StepperBase object, which serves as the base class for all

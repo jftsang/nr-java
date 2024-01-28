@@ -9,7 +9,7 @@ import com.snuggy.nr.util.*;
 
 public class StepperStoerm extends StepperBS {
 
-    // Stoermer�s rule for integrating y00 D f.x;y/ for a system of equations.
+    // Stoermer's rule for integrating y00 D f.x;y/ for a system of equations.
     // using StepperBS<D>::x; using StepperBS<D>::xold; using StepperBS<D>::y;
     // using StepperBS<D>::dydx; using StepperBS<D>::dense; using
     // StepperBS<D>::n;
@@ -60,7 +60,7 @@ public class StepperStoerm extends StepperBS {
         }
     }
 
-    // Here is the routine dy that implements Stoermer�s rule:
+    // Here is the routine dy that implements Stoermer's rule:
     public boolean dy(final double[] y, final double htot, final int k,  final double[] yend, 
             final $int ipt, final Dtype derivs) throws NRException {
         // Stoermer step. Inputs are y, H, and k. The output is returned

@@ -12,10 +12,10 @@ public class Gaumixmod extends preGaumixmod {
     // Solve for a Gaussian mixture model from a set of data points and initial
     // guesses of k means.
     private int nn, kk, mm; // Nos. of data points, components, and dimensions.
-    private final double[][] data, means, resp; // Local copies of xn’s, k’s, and the
-                                          // pnk’s.
-    private final double[] frac, lndets; // P.k/’s and log det†k’s.
-    private final double[][] sig_arr[]; // †k’s
+    private final double[][] data, means, resp; // Local copies of xn's, k's, and the
+                                          // pnk's.
+    private final double[] frac, lndets; // P.k/'s and log det'k's.
+    private final double[][] sig_arr[]; // 'k's
     private double loglike; // logL.
     
     public final double[][][] sig_arr() {
@@ -65,11 +65,11 @@ public class Gaumixmod extends preGaumixmod {
         double tmp, sum, max, oldloglike;
         final double[] u = doub_vec(mm), v = doub_vec(mm);
         oldloglike = loglike;
-        for (k = 0; k < kk; k++) { // Outer loop for computing the pnk’s.
-            Cholesky choltmp = new Cholesky(sig_arr[k]); // Decompose †k in the
+        for (k = 0; k < kk; k++) { // Outer loop for computing the pnk's.
+            Cholesky choltmp = new Cholesky(sig_arr[k]); // Decompose 'k in the
                                                      // outer loop.
             lndets[k] = choltmp.logdet();
-            for (n = 0; n < nn; n++) { // Inner loop for pnk’s.
+            for (n = 0; n < nn; n++) { // Inner loop for pnk's.
                 for (m = 0; m < mm; m++)
                     u[m] = data[n][m] - means[k][m];
                 choltmp.elsolve(u, v); // Solve L  v D u.
@@ -78,7 +78,7 @@ public class Gaumixmod extends preGaumixmod {
                 resp[n][k] = -0.5 * (sum + lndets[k]) + log(frac[k]);
             }
         }
-        // At this point we have unnormalized logs of the pnk’s. We need to
+        // At this point we have unnormalized logs of the pnk's. We need to
         // normalize using log-sum-exp and compute the log-likelihood.
         loglike = 0;
         for (n = 0; n < nn; n++) { // Separate normalization for each n.

@@ -61,7 +61,7 @@ public class HMM {
         double sum;
         // Although space constraints make us generally stingy about printing
         // code for checking input, we will save you a lot of grief by doing
-        // so in this case. If you get “matrix not normalized” errors, you
+        // so in this case. If you get 'matrix not normalized' errors, you
         // probably have your matrix transposed. Note that normalization
         // errors <1% are silently fixed.
         if (ncols(a.$()) != mstat)
@@ -96,7 +96,7 @@ public class HMM {
     // function forwardbackward. This fills the matrix pstate, so that
     // pstateti D Pt .i /. It also sets the internal variables lhood and
     // lrnrm so that the function loglikelihood returns the logarithm of L.
-    // Don’t be surprised at how large in magnitude this (negative) number
+    // Don't be surprised at how large in magnitude this (negative) number
     // can be. The probability of any particular data set of more than
     // trivial length is astronomically small! In the following code, the
     // quantities BIG, BIGI, arnrm, brnrm, and lrnrm all relate to dealing
@@ -123,7 +123,7 @@ public class HMM {
                 alpha.$()[t][j] = sum;
                 asum += sum;
             }
-            arnrm.$()[t] = arnrm.$()[t - 1]; // Renormalize the ?’s as necessary to
+            arnrm.$()[t] = arnrm.$()[t - 1]; // Renormalize the ?'s as necessary to
                                      // avoid
             // underflow, keeping track of how many renormalizations for each ?.
             if (asum < BIGI) {
@@ -145,7 +145,7 @@ public class HMM {
                 bsum += sum;
             }
             brnrm.$()[t] = brnrm.$()[t + 1];
-            if (bsum < BIGI) { // Similarly, renormalize the ?’s as necessary.
+            if (bsum < BIGI) { // Similarly, renormalize the ?'s as necessary.
                 ++brnrm.$()[t];
                 for (j = 0; j < mstat; j++)
                     beta.$()[t][j] *= BIG;
@@ -159,14 +159,14 @@ public class HMM {
             lhood *= BIG;
             lrnrm++;
         }
-        for (t = 0; t < nobs; t++) { // Get state probabilities from ?’s and
-                                     // ?’s.
+        for (t = 0; t < nobs; t++) { // Get state probabilities from ?'s and
+                                     // ?'s.
             sum = 0.;
             for (i = 0; i < mstat; i++)
                 sum += (pstate.$()[t][i] = alpha.$()[t][i] * beta.$()[t][i]);
-            // The next line is an equivalent calculation of sum. But we’d
+            // The next line is an equivalent calculation of sum. But we'd
             // rather
-            // have the normalization of the Pi .t/’s be more immune to roundoff
+            // have the normalization of the Pi .t/'s be more immune to roundoff
             // error. Hence we do the above sum for each value of t.
             // // sum = lhood*pow(BIGI, lrnrm - arnrm[t] - brnrm[t]);
             for (i = 0; i < mstat; i++)
@@ -211,7 +211,7 @@ public class HMM {
                 bnew[i][k] /= denom;
         }
         $$(b, bnew);
-        fbdone = 0; // Don’t let this routine be called again until forward}
+        fbdone = 0; // Don't let this routine be called again until forward}
         // backward() has been called.
 
     }

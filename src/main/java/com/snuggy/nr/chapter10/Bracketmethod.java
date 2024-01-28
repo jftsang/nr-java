@@ -80,7 +80,7 @@ public class Bracketmethod {
             $double u = $(bx.$() - ((bx.$() - cx.$()) * q - (bx.$() - ax.$()) * r)
                     / (2.0 * SIGN(MAX(abs(q - r), TINY), q - r)));
             double ulim = bx.$() + GLIMIT * (cx.$() - bx.$());
-            // We won’t go farther than this. Test various possibilities:
+            // We won't go farther than this. Test various possibilities:
             if ((bx.$() - u.$()) * (u.$() - cx.$()) > 0.0) { // Parabolic
                                                                          // u is
                                                                          // between

@@ -30,7 +30,7 @@ public class Proposal {
         //if (hit_count == 218)
 	    //    System.out.println("Proposal.hit_count is " + hit_count);
         double r = gau.doub();
-        if (r < 0.9) { // Lognormal steps holding the k’s constant.
+        if (r < 0.9) { // Lognormal steps holding the k's constant.
             s2.set_lam1(s1.lam1() * exp(logstep * gau.dev()));
             s2.set_lam2(s1.lam2() * exp(logstep * gau.dev()));
             s2.set_tc(s1.tc() * exp(logstep * gau.dev()));

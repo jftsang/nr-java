@@ -12,7 +12,7 @@ public class Svmgausskernel extends Svmgenkernel {
 
     public Svmgausskernel(final double[][] ddata, final double[] yy, final double ssigma) {
         // Constructor is called with the m  n data matrix, the vector of
-        // yi ’s, length m, and the constant .
+        // yi 's, length m, and the constant .
         super(yy, ddata);
         n = (ncols(data));
         sigma = (ssigma);

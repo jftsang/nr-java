@@ -102,7 +102,7 @@ public class Symmeig {
                     e[i] = z[i][l];
                 else {
                     for (k = 0; k < i; k++) {
-                        z[i][k] /= scale; // Use scaled a’s for transformation.
+                        z[i][k] /= scale; // Use scaled a's for transformation.
                         h += z[i][k] * z[i][k]; // Form  in h.
                     }
                     f = z[i][l];

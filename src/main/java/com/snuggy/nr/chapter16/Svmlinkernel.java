@@ -12,7 +12,7 @@ public class Svmlinkernel extends Svmgenkernel {
 
     public Svmlinkernel(final double[][] ddata, final double[] yy) {
         // Constructor is called with the m n data matrix, and the vector
-        // of yi ’s, length m.
+        // of yi 's, length m.
         super(yy, ddata);
         n = (ncols(data));
         mu = doub_vec(n);
