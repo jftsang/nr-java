@@ -696,7 +696,7 @@ public class Static {
                 nf[j] = nf[nf[j]];
     }
 
-    public static void eclazz(final int[] nf, Func_Int_Int_To_Bool equiv) {
+    public static void eclazz(final int[] nf, IntBinaryPredicate equiv) {
         // Given a user-supplied boolean function equiv that tells whether
         // a pair of elements, each in the range 0...n-1, are related, return
         // in nf[0..n-1] equivalence class numbers for each element.
@@ -707,7 +707,7 @@ public class Static {
             for (kk = 0; kk < jj; kk++) { // Loop over second element of all
                                           // pairs.
                 nf[kk] = nf[nf[kk]]; // Sweep it up this much.
-                if (equiv.eval(jj + 1, kk + 1))
+                if (equiv.test(jj + 1, kk + 1))
                     nf[nf[nf[kk]]] = jj;
                 // Good exercise for the reader to figure out why this much
                 // ancestry is necessary!
