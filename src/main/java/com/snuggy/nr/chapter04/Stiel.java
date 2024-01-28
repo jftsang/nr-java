@@ -5,43 +5,45 @@ import static com.snuggy.nr.util.Static.*;
 import static java.lang.Math.*;
 
 import com.snuggy.nr.util.*;
+import java.util.function.DoubleBinaryOperator;
+import java.util.function.DoubleUnaryOperator;
 
 public class Stiel {
 
     // Structure for calculating the abscissas and weights of an n-point
     // Gaussian quadrature formula using the Stieltjes procedure.
-    class pp implements Func_Doub_To_Doub, Func_Doub_Doub_To_Doub {
+    class pp implements DoubleUnaryOperator, DoubleBinaryOperator {
         // Functor returning the integrand for bj in eq. (4.6.7).
         private Stiel st;
 
-        public double eval(final double x, final double del) {
+        public double applyAsDouble(final double x, final double del) {
             // Returns W.x/p2.x/.
             double pval = st.p(x);
-            return pval * st.wt1.eval(x, del) * pval;
+            return pval * st.wt1.applyAsDouble(x, del) * pval;
             // This order lessens the chance of over ow.
         }
 
-        public double eval(final double t) throws NRException {
+        public double applyAsDouble(final double t) {
             // Returns W.x/p2.x/ dx=dt .
-            double x = st.fx.eval(t);
+            double x = st.fx.applyAsDouble(t);
             double pval = st.p(x);
-            return pval * st.wt2.eval(x) * st.fdxdt.eval(t) * pval;
+            return pval * st.wt2.applyAsDouble(x) * st.fdxdt.applyAsDouble(t) * pval;
             // This order lessens the chance of over ow.
         }
     }
 
-    class ppx implements Func_Doub_To_Doub, Func_Doub_Doub_To_Doub {
+    class ppx implements DoubleUnaryOperator, DoubleBinaryOperator {
         // Functor returning the integrand for aj in eq. (4.6.7).
         private Stiel st;
 
-        public double eval(final double x, final double del) {
+        public double applyAsDouble(final double x, final double del) {
             // Returns W.x/ x p2.x/.
-            return st.ppfunc.eval(x, del) * x;
+            return st.ppfunc.applyAsDouble(x, del) * x;
         }
 
-        public double eval(final double t) throws NRException {
+        public double applyAsDouble(final double t) {
             // Returns W.x/ x p2.x/ dx=dt .
-            return st.ppfunc.eval(t) * st.fx.eval(t);
+            return st.ppfunc.applyAsDouble(t) * st.fx.applyAsDouble(t);
         }
     }
 
@@ -52,10 +54,10 @@ public class Stiel {
     // For the finite range case, limits of integration and limit of integration
     // in transformed variable for the DE rule. For in nite range case, limits
     // of integration in transformed variable (hmax not used.
-    private Func_Doub_Doub_To_Doub wt1; // Pointers to user-supplied functions.
-    private Func_Doub_To_Doub wt2;
-    private Func_Doub_To_Doub fx;
-    private Func_Doub_To_Doub fdxdt;
+    private DoubleBinaryOperator wt1; // Pointers to user-supplied functions.
+    private DoubleUnaryOperator wt2;
+    private DoubleUnaryOperator fx;
+    private DoubleUnaryOperator fdxdt;
     private final double[] a, b;
     // Coecents of the recurrence relation for the orthogonal polynomials.
     private Quadrature s1, s2;
@@ -87,7 +89,7 @@ public class Stiel {
         return pval;
     }
 
-    public Stiel(final int nn, final double aaa, final double bbb, final double hmaxx, Func_Doub_Doub_To_Doub wwt1) {
+    public Stiel(final int nn, final double aaa, final double bbb, final double hmaxx, DoubleBinaryOperator wwt1) {
         // Constructor for nite-range case. Input are nn, the number of
         // quadrature abscissas and weights desired, aaa and bbb, the lower
         // and upper limits of integration, the parameter hmax to be passed to
@@ -106,7 +108,7 @@ public class Stiel {
         s2 = new DErule<ppx>(ppxfunc, aa, bb, hmax);
     }
 
-    public Stiel(final int nn, final double aaa, final double bbb, Func_Doub_To_Doub wwt2, Func_Doub_To_Doub ffx, Func_Doub_To_Doub ffdxdt) {
+    public Stiel(final int nn, final double aaa, final double bbb, DoubleUnaryOperator wwt2, DoubleUnaryOperator ffx, DoubleUnaryOperator ffdxdt) {
         // Constructor for in nite-range case. Input are nn, the number of
         // quadrature abscissas and weights desired, aaa and bbb, the lower
         // and upper limits of integration, the weight function W.x/, the
@@ -132,7 +134,7 @@ public class Stiel {
         // This choice ensures full double precision.
         final int NMAX = 11;
         double olds = 0.0, sum;
-        s.n = 0;
+        s.setRefinementLevel(0);
         for (int i = 1; i <= NMAX; i++) {
             sum = s.next();
             if (i > 3)

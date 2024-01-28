@@ -2,8 +2,11 @@
 package com.snuggy.nr.chapter04;
 
 import com.snuggy.nr.util.*;
+import java.util.function.DoubleUnaryOperator;
 
-public class Trapzd<T extends Func_Doub_To_Doub> extends Quadrature {
+public class Trapzd<T extends DoubleUnaryOperator> implements Quadrature {
+
+    private int refinementLevel;
 
     // Routine implementing the extended trapezoidal rule.
 
@@ -18,11 +21,21 @@ public class Trapzd<T extends Func_Doub_To_Doub> extends Quadrature {
         func = (funcc);
         a = (aa);
         b = (bb);
-        n = 0;
+        refinementLevel = 0;
     }
 
     // The constructor takes as inputs func, the function or functor to be
     // integrated between limits a and b, also input.
+
+    @Override
+    public int getRefinementLevel() {
+        return 0;
+    }
+
+    @Override
+    public void setRefinementLevel(int n) {
+
+    }
 
     public double next() throws NRException {
         // Returns the nth stage of refinement of the extended trapezoidal
@@ -33,18 +46,18 @@ public class Trapzd<T extends Func_Doub_To_Doub> extends Quadrature {
         // by adding 2n-2 additional interior points.
         double x, tnm, sum, del;
         int it, j;
-        n++;
-        if (n == 1) {
-            return (s = 0.5 * (b - a) * (func.eval(a) + func.eval(b)));
+        refinementLevel++;
+        if (refinementLevel == 1) {
+            return (s = 0.5 * (b - a) * (func.applyAsDouble(a) + func.applyAsDouble(b)));
         } else {
-            for (it = 1, j = 1; j < n - 1; j++)
+            for (it = 1, j = 1; j < refinementLevel - 1; j++)
                 it <<= 1;
             tnm = it;
             del = (b - a) / tnm; // This is the spacing of the points to be
                                  // added.
             x = a + 0.5 * del;
             for (sum = 0.0, j = 0; j < it; j++, x += del)
-                sum += func.eval(x);
+                sum += func.applyAsDouble(x);
             s = 0.5 * (s + (b - a) * sum / tnm); // This replaces s by its
                                                  // refined value.
             return s;

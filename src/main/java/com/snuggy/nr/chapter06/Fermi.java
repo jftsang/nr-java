@@ -5,8 +5,10 @@ import static java.lang.Math.*;
 
 import com.snuggy.nr.chapter04.*;
 import com.snuggy.nr.util.*;
+import java.util.function.DoubleBinaryOperator;
+import java.util.function.DoubleUnaryOperator;
 
-public class Fermi implements Func_Doub_To_Doub, Func_Doub_Doub_To_Doub {
+public class Fermi implements DoubleUnaryOperator, DoubleBinaryOperator {
 
     private double kk, etaa, thetaa;
 
@@ -14,7 +16,7 @@ public class Fermi implements Func_Doub_To_Doub, Func_Doub_Doub_To_Doub {
     // Doub operator() (final double x, final double del);
     // Doub val(final double k, final double eta, final double theta);
 
-    public double eval(final double t) {
+    public double applyAsDouble(final double t) {
         // Integrand for trapezoidal quadrature of generalized Fermi-Dirac
         // integral with transformation
         // x D exp.t  et /.
@@ -23,7 +25,7 @@ public class Fermi implements Func_Doub_To_Doub, Func_Doub_Doub_To_Doub {
         return x * (1.0 + exp(-t)) * pow(x, kk) * sqrt(1.0 + thetaa * 0.5 * x) / (exp(x - etaa) + 1.0);
     }
 
-    public double eval(final double x, final double del) {
+    public double applyAsDouble(final double x, final double del) {
         // Integrand for DE rule quadrature of generalized Fermi-Dirac integral.
         if (x < 1.0)
             return pow(del, kk) * sqrt(1.0 + thetaa * 0.5 * x) / (exp(x - etaa) + 1.0);
@@ -40,7 +42,7 @@ public class Fermi implements Func_Doub_To_Doub, Func_Doub_Doub_To_Doub {
         final int NMAX = 11;
         double a, aa, b, bb, hmax, olds = 0.0, sum;
         kk = k; // Load the arguments into the member variables
-        etaa = eta; // for use in the function evaluations.
+        etaa = eta; // for use in the function applyAsDoubleuations.
         thetaa = theta;
         if (eta <= 15.0) {
             a = -4.5; // Set limits for x D exp.t  et / mapping.

@@ -2,18 +2,19 @@
 package com.snuggy.nr.chapter04;
 
 import com.snuggy.nr.util.*;
+import java.util.function.DoubleUnaryOperator;
 
-public class Midinf<T extends Func_Doub_To_Doub> extends Midpnt<T> {
+public class Midinf<T extends DoubleUnaryOperator> extends MidpointQuadrature<T> {
 
     // This routine is an exact replacement for midpnt, i.e., returns the
     // nth stage of refinement of the integral of funcc from aa to bb, except
-    // that the function is evaluated at evenly spaced points in 1=x rather
+    // that the function is applyAsDoubleuated at evenly spaced points in 1=x rather
     // than in x. This allows the upper limit bb to be as large and positive
     // as the computer allows, or the lower limit aa to be as large and
     // negative, but not both. aa and bb must have the same sign.
 
     public double func(final double x) throws NRException {
-        return super.funk.eval(1.0 / x) / (x * x); // Effect the change of
+        return super.funk.applyAsDouble(1.0 / x) / (x * x); // Effect the change of
                                                    // variable.
     }
 

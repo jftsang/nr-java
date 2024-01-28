@@ -4,8 +4,9 @@ package com.snuggy.nr.chapter04;
 import static java.lang.Math.*;
 
 import com.snuggy.nr.util.*;
+import java.util.function.DoubleUnaryOperator;
 
-public class Midsql<T extends Func_Doub_To_Doub> extends Midpnt<T> {
+public class Midsql<T extends DoubleUnaryOperator> extends MidpointQuadrature<T> {
 
     // This routine is an exact replacement for midpnt, except that
     // it allows for an inverse square-root singularity in the integrand
@@ -14,7 +15,7 @@ public class Midsql<T extends Func_Doub_To_Doub> extends Midpnt<T> {
     private double aorig;
 
     public double func(final double x) throws NRException {
-        return 2.0 * x * super.funk.eval(aorig + x * x); // Effect the change of
+        return 2.0 * x * super.funk.applyAsDouble(aorig + x * x); // Effect the change of
                                                          // variable.
     }
 

@@ -1,20 +1,34 @@
 package com.snuggy.nr.chapter04;
 
 import com.snuggy.nr.util.*;
+import java.util.function.DoubleUnaryOperator;
 
-public class Midpnt<T extends Func_Doub_To_Doub> extends Quadrature {
+public class MidpointQuadrature<T extends DoubleUnaryOperator> implements
+    Quadrature {
+
+    private int refinementLevel;
 
     // Routine implementing the extended midpoint rule.
     protected double a, b, s; // Limits of integration and current value of inte
     protected T funk; // gral.
 
-    public Midpnt(final T funcc, final double aa, final double bb) {
+    public MidpointQuadrature(final T funcc, final double aa, final double bb) {
         // The constructor takes as inputs func, the function or functor to
         // be integrated between limits a and b, also input.
         funk = (funcc);
         a = (aa);
         b = (bb);
-        n = 0;
+        setRefinementLevel(0);
+    }
+
+    @Override
+    public int getRefinementLevel() {
+        return refinementLevel;
+    }
+
+    @Override
+    public void setRefinementLevel(int n) {
+        refinementLevel = n;
     }
 
     @Override
@@ -27,11 +41,11 @@ public class Midpnt<T extends Func_Doub_To_Doub> extends Quadrature {
         // points.
         int it, j;
         double x, tnm, sum, del, ddel;
-        n++;
-        if (n == 1) {
+        incrementRefinementLevel();
+        if (getRefinementLevel() == 1) {
             return (s = (b - a) * func(0.5 * (a + b)));
         } else {
-            for (it = 1, j = 1; j < n - 1; j++)
+            for (it = 1, j = 1; j < getRefinementLevel() - 1; j++)
                 it *= 3;
             tnm = it;
             del = (b - a) / (3.0 * tnm);
@@ -51,7 +65,7 @@ public class Midpnt<T extends Func_Doub_To_Doub> extends Quadrature {
     }
 
     public double func(final double x) throws NRException {
-        return funk.eval(x);
+        return funk.applyAsDouble(x);
     } // Identity mapping.
 
 }

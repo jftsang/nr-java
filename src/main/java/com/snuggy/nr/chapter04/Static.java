@@ -8,14 +8,16 @@ import static java.lang.Math.*;
 import com.snuggy.nr.chapter03.*;
 import com.snuggy.nr.chapter11.*;
 import com.snuggy.nr.util.*;
+import java.util.function.DoubleBinaryOperator;
+import java.util.function.DoubleUnaryOperator;
 
 public class Static {
 
-    public static <T extends Func_Doub_To_Doub> double qtrap(final T func, final double a, final double b) throws NRException {
+    public static <T extends DoubleUnaryOperator> double qtrap(final T func, final double a, final double b) throws NRException {
         return qtrap(func, a, b, 1.0e-10);
     }
 
-    public static <T extends Func_Doub_To_Doub> double qtrap(final T func, final double a, final double b, final double eps)
+    public static <T extends DoubleUnaryOperator> double qtrap(final T func, final double a, final double b, final double eps)
             throws NRException {
         // Returns the integral of the function or functor func from a to b.
         // The constants EPS can be set to the desired fractional accuracy and
@@ -35,11 +37,11 @@ public class Static {
         throw new NRException("Too many steps in routine qtrap");
     }
 
-    public static <T extends Func_Doub_To_Doub> double qsimp(final T func, final double a, final double b) throws NRException {
+    public static <T extends DoubleUnaryOperator> double qsimp(final T func, final double a, final double b) throws NRException {
         return qsimp(func, a, b, 1.0e-10);
     }
 
-    public static <T extends Func_Doub_To_Doub> double qsimp(final T func, final double a, final double b, final double eps)
+    public static <T extends DoubleUnaryOperator> double qsimp(final T func, final double a, final double b, final double eps)
             throws NRException {
         // Returns the integral of the function or functor func from a to b.
         // The constants EPS can be set to the desired fractional accuracy and
@@ -60,11 +62,11 @@ public class Static {
         throw new NRException("Too many steps in routine qsimp");
     }
 
-    public static <T extends Func_Doub_To_Doub> double qromb(final T func, final double a, final double b) throws NRException {
+    public static <T extends DoubleUnaryOperator> double qromb(final T func, final double a, final double b) throws NRException {
         return qromb(func, a, b, 1.0e-10);
     }
 
-    public static <T extends Func_Doub_To_Doub> double qromb(final T func, final double a, final double b, final double eps) throws NRException {
+    public static <T extends DoubleUnaryOperator> double qromb(final T func, final double a, final double b, final double eps) throws NRException {
         // Returns the integral of the function or functor func from a to b.
         // Integration is performed by Romberg's method of order 2K, where,
         // e.g., K=2 is Simpson's rule.
@@ -96,14 +98,14 @@ public class Static {
         throw new NRException("Too many steps in routine qromb");
     }
 
-    public static <T extends Func_Doub_To_Doub> double qromo(final Midpnt<T> q) throws NRException {
+    public static <T extends DoubleUnaryOperator> double qromo(final MidpointQuadrature<T> q) throws NRException {
         return qromo(q, 3.0e-9);
     }
 
-    public static <T extends Func_Doub_To_Doub> double qromo(final Midpnt<T> q, final double eps) throws NRException {
+    public static <T extends DoubleUnaryOperator> double qromo(final MidpointQuadrature<T> q, final double eps) throws NRException {
         // Romberg integration on an open interval. Returns the integral of a
         // function using any specified elementary quadrature algorithm q and
-        // Romberg's method. Normally q will be an open formula, not evaluating
+        // Romberg's method. Normally q will be an open formula, not applyAsDoubleuating
         // the function at the endpoints. It is assumed that q triples the
         // number of steps on each call, and that its error series contains
         // only even powers of the number of steps. The routines midpnt,
@@ -132,10 +134,10 @@ public class Static {
     private static final double w[] = { 0.2955242247147529, 0.2692667193099963, 0.2190863625159821, 0.1494513491505806,
             0.0666713443086881 };
 
-    public static <T extends Func_Doub_To_Doub> double qgaus(final T func, final double a, final double b) throws NRException {
+    public static <T extends DoubleUnaryOperator> double qgaus(final T func, final double a, final double b) throws NRException {
         // Returns the integral of the function or functor func between a and
         // b, by ten-point Gauss- Legendre integration: the function is
-        // evaluated exactly ten times at interior points in the range of
+        // applyAsDoubleuated exactly ten times at interior points in the range of
         // integration.
 
         double xm = 0.5 * (b + a);
@@ -146,7 +148,7 @@ public class Static {
         // sum to 2.
         for (int j = 0; j < 5; j++) {
             double dx = xr * x[j];
-            s += w[j] * (func.eval(xm + dx) + func.eval(xm - dx));
+            s += w[j] * (func.applyAsDouble(xm + dx) + func.applyAsDouble(xm - dx));
         }
         return s *= xr; // Scale the answer to the range of integration.
     }
@@ -173,7 +175,7 @@ public class Static {
                 p2 = 0.0;
                 for (int j = 0; j < n; j++) { // Loop up the recurrence relation
                                               // to get the
-                    p3 = p2; // Legendre polynomial evaluated at z.
+                    p3 = p2; // Legendre polynomial applyAsDoubleuated at z.
                     p2 = p1;
                     p1 = ((2.0 * j + 1.0) * z * p2 - j * p3) / (j + 1);
                 }
@@ -220,7 +222,7 @@ public class Static {
                 p2 = 0.0;
                 for (j = 0; j < n; j++) { // Loop up the recurrence relation to
                                           // get the
-                    p3 = p2; // Laguerre polynomial evaluated at z.
+                    p3 = p2; // Laguerre polynomial applyAsDoubleuated at z.
                     p2 = p1;
                     p1 = ((2 * j + 1 + alf - z) * p2 - (j + alf) * p3) / (j + 1);
                 }
@@ -273,7 +275,7 @@ public class Static {
                 p2 = 0.0;
                 for (j = 0; j < n; j++) { // Loop up the recurrence relation to
                                           // get
-                    // the Hermite polynomial evaluated at
+                    // the Hermite polynomial applyAsDoubleuated at
                     // z.
                     p3 = p2;
                     p2 = p1;
@@ -353,7 +355,7 @@ public class Static {
                 p2 = 1.0;
                 for (j = 2; j <= n; j++) { // Loop up the recurrence relation to
                                            // get the
-                    p3 = p2; // Jacobi polynomial evaluated at z.
+                    p3 = p2; // Jacobi polynomial applyAsDoubleuated at z.
                     p2 = p1;
                     temp = 2 * j + alfbet;
                     a = 2 * j * (j + alfbet) * (temp - 2.0);
@@ -471,12 +473,12 @@ public class Static {
         gaucof(a, b, amu0, x, w);
     }
 
-    public static <T extends Func_Doub_Doub_Doub_To_Doub> 
+    public static <T extends DoubleTernaryOperator>
             double quad3d(final T func, final double x1, final double x2, 
-                            final Func_Doub_To_Doub y1, 
-                            final Func_Doub_To_Doub y2, 
-                            final Func_Doub_Doub_To_Doub z1, 
-                            final Func_Doub_Doub_To_Doub z2) throws NRException {
+                            final DoubleUnaryOperator y1,
+                            final DoubleUnaryOperator y2,
+                            final DoubleBinaryOperator z1,
+                            final DoubleBinaryOperator z2) throws NRException {
         // Returns the integral of a user-supplied function func over a
         // three-dimensional region specified by the limits x1, x2, and by
         // the user-supplied functions y1, y2, z1, and z2, as defined

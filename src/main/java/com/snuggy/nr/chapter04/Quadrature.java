@@ -1,17 +1,24 @@
-
 package com.snuggy.nr.chapter04;
 
 import com.snuggy.nr.util.*;
 
-public abstract class Quadrature {
+/**
+ * Abstract base class for elementary quadrature algorithms.
+ */
+public interface Quadrature {
 
-    // Abstract base class for elementary quadrature algorithms.
+    int getRefinementLevel();
 
-    protected int n; // Current level of refinement.
+    void setRefinementLevel(int n);
 
-    public abstract double next() throws NRException;
+    default void incrementRefinementLevel() {
+        setRefinementLevel(getRefinementLevel() + 1);
+    }
 
-    // Returns the value of the integral at the nth stage of refinement.
-    // The function next() must be defined in the derived class.
+    /**
+     * Returns the value of the integral at the nth stage of refinement. The function next() must be
+     * defined in the derived class.
+     */
+    double next() throws NRException;
 
 }

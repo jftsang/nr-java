@@ -4,6 +4,7 @@ import static com.snuggy.nr.util.Static.*;
 import static java.lang.Math.*;
 
 import com.snuggy.nr.util.*;
+import java.util.function.DoubleUnaryOperator;
 
 public class Adapt {
 
@@ -46,15 +47,15 @@ public class Adapt {
             TOL = 10.0 * EPS;
     }
 
-    public <T extends Func_Doub_To_Doub> double integrate(final T func, final double a, final double b) throws NRException {
+    public <T extends DoubleUnaryOperator> double integrate(final T func, final double a, final double b) throws NRException {
         double m, h, fa, fb, i1, i2, is, erri1, erri2, r;
         final double[] y = doub_vec(13);
         m = 0.5 * (a + b);
         h = 0.5 * (b - a);
-        fa = y[0] = func.eval(a);
-        fb = y[12] = func.eval(b);
+        fa = y[0] = func.applyAsDouble(a);
+        fb = y[12] = func.applyAsDouble(b);
         for (int i = 1; i < 12; i++)
-            y[i] = func.eval(m + x[i] * h);
+            y[i] = func.applyAsDouble(m + x[i] * h);
         i2 = (h / 6.0) * (y[0] + y[12] + 5.0 * (y[4] + y[8])); // 4-point
                                                                // Gauss-Lobatto
                                                                // formula.
@@ -78,7 +79,7 @@ public class Adapt {
         return adaptlob(func, a, b, fa, fb, is);
     }
 
-    public <T extends Func_Doub_To_Doub> double adaptlob(final T func, final double a, final double b, final double fa,
+    public <T extends DoubleUnaryOperator> double adaptlob(final T func, final double a, final double b, final double fa,
             final double fb, final double is) throws NRException {
         // Helper function for recursion.
         double m, h, mll, ml, mr, mrr, fmll, fml, fm, fmrr, fmr, i1, i2;
@@ -88,11 +89,11 @@ public class Adapt {
         ml = m - beta * h;
         mr = m + beta * h;
         mrr = m + alpha * h;
-        fmll = func.eval(mll);
-        fml = func.eval(ml);
-        fm = func.eval(m);
-        fmr = func.eval(mr);
-        fmrr = func.eval(mrr);
+        fmll = func.applyAsDouble(mll);
+        fml = func.applyAsDouble(ml);
+        fm = func.applyAsDouble(m);
+        fmr = func.applyAsDouble(mr);
+        fmrr = func.applyAsDouble(mrr);
         i2 = h / 6.0 * (fa + fb + 5.0 * (fml + fmr)); // 4-point Gauss-Lobatto
                                                       // formula.
         i1 = h / 1470.0 * (77.0 * (fa + fb) + 432.0 * (fmll + fmrr) + 625.0 * (fml + fmr) + 672.0 * fm);

@@ -4,8 +4,9 @@ package com.snuggy.nr.chapter04;
 import static java.lang.Math.*;
 
 import com.snuggy.nr.util.*;
+import java.util.function.DoubleUnaryOperator;
 
-public class Midexp<T extends Func_Doub_To_Doub> extends Midpnt<T> {
+public class Midexp<T extends DoubleUnaryOperator> extends MidpointQuadrature<T> {
 
     // This routine is an exact replacement for midpnt, except that bb
     // is assumed to be infinite (value passed not actually used). It
@@ -13,7 +14,7 @@ public class Midexp<T extends Func_Doub_To_Doub> extends Midpnt<T> {
     // at infinity.
 
     public double func(final double x) throws NRException {
-        return super.funk.eval(-log(x)) / x; // Effect the change of
+        return super.funk.applyAsDouble(-log(x)) / x; // Effect the change of
                                                   // variable.
     }
 

@@ -5,17 +5,24 @@ import static com.snuggy.nr.chapter04.Static.*;
 
 import com.snuggy.nr.chapter06.*;
 import com.snuggy.nr.util.*;
+import java.util.function.DoubleUnaryOperator;
 
 public class Levex {
 
-    static class AFunc implements Func_Doub_To_Doub {
-        public double eval(final double x) throws NRException {
-            // Integrand for (5.3.22).
+    /**
+     * Integrand for (5.3.22).
+     */
+    static class AFunc implements DoubleUnaryOperator {
+        public double applyAsDouble(final double x) {
             if (x == 0.0)
                 return 0.0;
             else {
                 Bessel bess = new Bessel();
-                return x * bess.jnu(0.0, x) / (1.0 + x * x);
+                try {
+                    return x * bess.jnu(0.0, x) / (1.0 + x * x);
+                } catch (NRException e) {
+                    throw new RuntimeException(e);
+                }
             }
         }
     }

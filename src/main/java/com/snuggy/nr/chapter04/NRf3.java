@@ -2,13 +2,14 @@
 package com.snuggy.nr.chapter04;
 
 import com.snuggy.nr.util.*;
+import java.util.function.DoubleUnaryOperator;
 
-public class NRf3 implements Func_Doub_To_Doub {
+public class NRf3 implements DoubleUnaryOperator {
     
 	private double xsav,ysav;
-	private Func_Doub_Doub_Doub_To_Doub func3d;
+	private DoubleTernaryOperator func3d;
 	
-	public void set_func3d(final Func_Doub_Doub_Doub_To_Doub func3d) {
+	public void set_func3d(final DoubleTernaryOperator func3d) {
 	    this.func3d = func3d;
 	}
 	
@@ -24,9 +25,9 @@ public class NRf3 implements Func_Doub_To_Doub {
 	    this.xsav = xsav;
 	}
 	
-	public double eval(final double z)  { 
-		// The integrand f.x;y;z/ evaluated at fixed x and y.
-		return func3d.eval(xsav,ysav,z);
+	public double applyAsDouble(final double z)  {
+		// The integrand f.x;y;z/ applyAsDoubleuated at fixed x and y.
+		return func3d.applyAsDouble(xsav,ysav,z);
 	}
 
 }
