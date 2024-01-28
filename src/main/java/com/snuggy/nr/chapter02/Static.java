@@ -136,7 +136,7 @@ public class Static {
         int i, j, k, tmploop, n = nrows(a);
         for (i = 0; i < n; i++) {
             k = i - m1;
-            tmploop = MIN(m1 + m2 + 1, (int) (n - k));
+            tmploop = MIN(m1 + m2 + 1, n - k);
             b[i] = 0.0;
             for (j = MAX(0, -k); j < tmploop; j++)
                 b[i] += a[i][j] * x[j + k];

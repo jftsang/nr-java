@@ -6,7 +6,7 @@ import static java.lang.Math.*;
 
 public class Bandec {
 
-    // Object for solving linear equations A  x D b for a band-diagonal
+    // Object for solving linear equations A x = b for a band-diagonal
     // matrix A, using LU decomposition.
     private int n, m1, m2;
     private final double[][] au, al; // Upper and lower triangular matrices, stored
@@ -19,13 +19,14 @@ public class Bandec {
     // void solve(VecDoub_I &b, VecDoub_O &x); Solve a right-hand side vector.
     // Doub det(); Return determinant of A.
 
-    // The constructor takes as arguments the compactly stored matrix A, and
-    // the integers m1 and m2. (One could of course define a 'band-diagonal
-    // matrix object' to encapsulate these quantities, but in this brief
-    // treatment we want to keep things simple.)
-
+    /**
+     * The constructor takes as arguments the compactly stored matrix A, and
+     * the integers m1 and m2. (One could of course define a 'band-diagonal
+     * matrix object' to encapsulate these quantities, but in this brief
+     * treatment we want to keep things simple.)
+     */
     public Bandec(final double[][] a, final int mm1, final int mm2) {
-        // Constructor. Given an nn band-diagonal matrix A with m1 subdiagonal
+        // Constructor. Given an n*n band-diagonal matrix A with m1 subdiagonal
         // rows and m2 superdiagonal rows, compactly stored in the array
         // a[0..n-1][0..m1+m2] as described in the comment for routine banmul,
         // an LU decomposition of a rowwise permutation of A is constructed.
@@ -130,7 +131,9 @@ public class Bandec {
         }
     }
 
-    // And, finally, a method for getting the determinant:
+    /**
+     * And, finally, a method for getting the determinant:
+     */
     public double det() {
         // Using the stored decomposition, return the determinant of the matrix
         // A.

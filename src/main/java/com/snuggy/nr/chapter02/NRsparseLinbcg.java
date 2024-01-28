@@ -12,7 +12,7 @@ public class NRsparseLinbcg extends Linbcg {
     // matrix A in NRsparseMat's compressed column sparse format. A naive
     // diagonal preconditioner is used.
 
-    private NRsparseMat mat;
+    private final NRsparseMat mat;
     private int n;
 
     public NRsparseLinbcg(final NRsparseMat matrix) {

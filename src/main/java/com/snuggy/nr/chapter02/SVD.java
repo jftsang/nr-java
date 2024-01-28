@@ -9,10 +9,12 @@ public class SVD {
 
     // Object for singular value decomposition of a matrix A, and related
     // functions.
-    private int m, n;
+    private final int m;
+    private final int n;
     private final double[][] u, v; // The matrices U and V.
     private final double[] w; // The diagonal matrix W.
-    private double eps, tsh;
+    private final double eps;
+    private double tsh;
 
     public SVD(final double[][] a) throws NRException {
         // Constructor. The single argument is A. The SVD computation is done
@@ -41,39 +43,32 @@ public class SVD {
         return w;
     }
 
-    // void solve(VecDoub_I &b, VecDoub_O &x, Doub thresh);
-    // void solve(MatDoub_I &b, MatDoub_O &x, Doub thresh);
-
-    // Solve with (apply the pseudoinverse to) one or more right-hand sides.
-    // Int rank(Doub thresh); Quantities associated with the range and
-    // Int nullity(Doub thresh); nullspace of A.
-    // MatDoub range(Doub thresh);
-    // MatDoub nullspace(Doub thresh);
-
-    public double inv_condition() { // Return reciprocal of the condition num
-        return (w[0] <= 0. || w[n - 1] <= 0.) ? 0. : w[n - 1] / w[0]; // ber of
-                                                                      // A.
+    /**
+     * Return reciprocal of the condition number of A
+     */
+    public double inv_condition() {
+        return (w[0] <= 0. || w[n - 1] <= 0.) ? 0. : w[n - 1] / w[0];
     }
 
     public void decompose() throws NRException {
         boolean flag;
-        int i = 0;
-        int its = 0;
-        int j = 0;
-        int jj = 0;
-        int k = 0;
+        int i;
+        int its;
+        int j;
+        int jj;
+        int k;
         int l = 0;
         int nm = 0;
-        double anorm = 0.0;
-        double c = 0.0;
-        double f = 0.0;
-        double g = 0.0;
-        double h = 0.0;
-        double s = 0.0;
-        double scale = 0.0;
-        double x = 0.0;
-        double y = 0.0;
-        double z = 0.0;
+        double anorm;
+        double c;
+        double f;
+        double g;
+        double h;
+        double s;
+        double scale;
+        double x;
+        double y;
+        double z;
         final double[] rv1 = doub_vec(n);
         g = scale = anorm = 0.0;
         for (i = 0; i < n; i++) {
@@ -269,12 +264,12 @@ public class SVD {
     }
 
     public void reorder() {
-        int i = 0;
-        int j = 0;
-        int k = 0;
-        int s = 0;
+        int i;
+        int j;
+        int k;
+        int s;
         int inc = 1;
-        double sw = 0.0;
+        double sw;
         final double[] su = doub_vec(m);
         final double[] sv = doub_vec(n);
         do {
@@ -411,7 +406,7 @@ public class SVD {
     }
 
     public void solve(final double[] b, final double[] x, final double thresh) throws NRException {
-        // Solve A  x D b for a vector x using the pseudoinverse of A as
+        // Solve A x = b for a vector x using the pseudoinverse of A as
         // obtained by SVD. If positive, thresh is the threshold value below
         // which singular values are considered as zero. If thresh is
         // negative, a default based on expected roundoff error is used.

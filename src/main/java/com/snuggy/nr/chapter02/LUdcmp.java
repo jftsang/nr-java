@@ -11,7 +11,7 @@ import com.snuggy.nr.util.*;
 
 public class LUdcmp {
 
-    private int n;
+    private final int n;
     private final double[][] lu; // Stores the decomposition.
     private final int[] indx; // Stores the permutation.
     private double d; // Used by det.
@@ -129,8 +129,9 @@ public class LUdcmp {
                 ii = i + 1; // will have to do the sums in the loop above.
             x[i] = sum;
         }
-        for (i = n - 1; i >= 0; i--) { // Now we do the backsubstitution,
-                                       // equation (2.3.7).
+
+        // Now we do the backsubstitution equation (2.3.7).
+        for (i = n - 1; i >= 0; i--) {
             sum = x[i];
             for (j = i + 1; j < n; j++)
                 sum -= lu[i][j] * x[j];
@@ -161,7 +162,7 @@ public class LUdcmp {
 
     public void inverse(final $double2d ainv) throws NRException {
         // Using the stored LU decomposition, return in ainv the matrix inverse
-        // A1.
+        // A^-1.
         int i, j;
         ainv.$(doub_mat(n, n));
         for (i = 0; i < n; i++) {
@@ -188,11 +189,11 @@ public class LUdcmp {
         int i, j;
         final double[] r = doub_vec(n);
         for (i = 0; i < n; i++) { // Calculate the right-hand side, accumulating
-            BigDecimal sdp = new BigDecimal(-b[i]); // the residual in higher
+            BigDecimal sdp = BigDecimal.valueOf(-b[i]); // the residual in higher
                                                     // precision.
             for (j = 0; j < n; j++)
                 // sdp += (Ldoub)aref[i][j] * (Ldoub)x[j];
-                sdp = sdp.add(new BigDecimal(aref[i][j]).multiply(new BigDecimal(x[j])));
+                sdp = sdp.add(BigDecimal.valueOf(aref[i][j]).multiply(BigDecimal.valueOf(x[j])));
             r[i] = sdp.doubleValue();
         }
         solve(r, r); // Solve for the error term,

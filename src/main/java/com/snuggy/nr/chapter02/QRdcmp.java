@@ -9,7 +9,7 @@ import com.snuggy.nr.util.*;
 public class QRdcmp {
 
     // Object for QR decomposition of a matrix A, and related functions.
-    private int n;
+    private final int n;
     private final double[][] qt, r; // Stored QT and R.
     private boolean sing; // Indicates whether A is singular.
 

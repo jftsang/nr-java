@@ -27,7 +27,7 @@ public abstract class Linbcg {
     public void solve(final double[] b, final double[] x, final int itol, final double tol, 
                         final int itmax, final $int iter, final $double err) 
             throws NRException {
-        // Solves Ax D b for x[0..n-1], given b[0..n-1], by the iterative
+        // Solves Ax = b for x[0..n-1], given b[0..n-1], by the iterative
         // biconjugate gradient method. On input x[0..n-1] should be set to an
         // initial guess of the solution (or all zeros); itol is 1,2,3, or 4,
         // specifying which convergence test is applied (see text); itmax is
@@ -81,7 +81,7 @@ public abstract class Linbcg {
         while (iter.$() < itmax) { // Main loop.
             //++(iter);
             iter.$(iter.$() + 1);
-            asolve(rr, zz.$(), 1); // Final 1 indicates use of transpose matrixeA T
+            asolve(rr, zz.$(), 1); // Final 1 indicates use of transpose matrix A T
                                // .
             for (bknum = 0.0, j = 0; j < n; j++)
                 bknum += z.$()[j] * rr[j];
@@ -109,12 +109,12 @@ public abstract class Linbcg {
                 r.$()[j] -= ak * z.$()[j];
                 rr[j] -= ak * zz.$()[j];
             }
-            asolve(r.$(), z.$(), 0); // SolveeA  z D r and check stopping criterion.
+            asolve(r.$(), z.$(), 0); // Solve Az = r and check stopping criterion.
             if (itol == 1)
                 err.$(snrm(r.$(), itol) / bnrm);
             else if (itol == 2)
                 err.$(snrm(z.$(), itol) / bnrm);
-            else if (itol == 3 || itol == 4) {
+            else {
                 zm1nrm = znrm;
                 znrm = snrm(z.$(), itol);
                 if (abs(zm1nrm - znrm) > EPS * znrm) {

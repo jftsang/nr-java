@@ -7,18 +7,19 @@ import com.snuggy.nr.refs.*;
 import com.snuggy.nr.util.*;
 
 public class Calendar {
-    
-    public static void flmoon(final int n, final int nph, final $int jd, final $double frac) 
-            throws NRException {
-        // Our routines begin with an introductory comment summarizing their
-        // purpose and explaining their calling sequence. This routine
-        // calculates the phases of the moon. Given an integer n and a code
-        // nph for the phase desired (nph D 0 for new moon, 1 for first
-        // quarter, 2 for full, 3 for last quarter), the routine returns the
-        // Julian Day Number jd, and the fractional part of a day frac to be
-        // added to it, of the nth such phase since January, 1900. Greenwich
-        // Mean Time is assumed.
 
+    /**
+     * Our routines begin with an introductory comment summarizing their
+     * purpose and explaining their calling sequence. This routine
+     * calculates the phases of the moon. Given an integer n and a code
+     * nph for the phase desired (nph D 0 for new moon, 1 for first
+     * quarter, 2 for full, 3 for last quarter), the routine returns the
+     * Julian Day Number jd, and the fractional part of a day frac to be
+     * added to it, of the nth such phase since January, 1900. Greenwich
+     * Mean Time is assumed.
+     */
+    public static void flmoon(final int n, final int nph, final $int jd, final $double frac)
+            throws NRException {
         final double RAD = 3.141592653589793238 / 180.0;
         int i;
         double am, as, c, t, t2, xtra;

@@ -19,8 +19,7 @@ public class NRsparseMat implements ByValue<NRsparseMat> {
     
     @Override
     public NRsparseMat copyOut() {
-        NRsparseMat r = new NRsparseMat(this);
-	    return r;
+        return new NRsparseMat(this);
     }
 
     @Override
@@ -66,17 +65,6 @@ public class NRsparseMat implements ByValue<NRsparseMat> {
     public int ncols() {
         return ncols;
     }
-
-    /*
-    public NRsparseMat() {
-        nrows = (0);
-        ncols = (0);
-        nvals = (0);
-        col_ptr = null;
-        row_ind = null;
-        val = null;
-    }
-    */
 
     public NRsparseMat(final int m, final int n, final int nnvals) {
         nrows = (m);

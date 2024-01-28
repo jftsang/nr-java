@@ -10,10 +10,12 @@ import static java.lang.Math.sqrt;
 import com.snuggy.nr.refs.$double2d;
 import com.snuggy.nr.util.NRException;
 
+/**
+ * Object for Cholesky decomposition of a matrix A, and related functions.
+ */
 public class Cholesky {
 
-    // Object for Cholesky decomposition of a matrix A, and related functions.
-    private int n;
+    private final int n;
     private final double[][] el; // Stores the decomposition.
 
     public Cholesky(final double[][] a) throws NRException {
@@ -113,7 +115,7 @@ public class Cholesky {
             }
         for (i = n - 1; i >= 0; i--)
             for (j = 0; j <= i; j++) {
-                sum = (i < j ? 0. : ainv.$()[j][i]);
+                sum = ainv.$()[j][i];
                 for (k = i + 1; k < n; k++)
                     sum -= el[k][i] * ainv.$()[j][k];
                 ainv.$()[i][j] = ainv.$()[j][i] = sum / el[i][i];

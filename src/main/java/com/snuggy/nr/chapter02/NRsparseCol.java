@@ -29,13 +29,6 @@ public class NRsparseCol {
         val = doub_vec(nnvals);
     } // Constructor. Initializes vector to zero.
 
-    public NRsparseCol() {
-        nrows = (0);
-        nvals = (0);
-        row_ind = null;
-        val = null;
-    } // Default constructor.
-
     public void resize(final int m, final int nnvals) {
         nrows = m;
         nvals = nnvals;

@@ -7,7 +7,7 @@ import java.util.*;
 public class ADAT {
 
     final private NRsparseMat a, at; // Store references to A and AT .
-    private NRsparseMat adat; // This will hold ADAT .
+    private final NRsparseMat adat; // This will hold ADAT .
 
     // ADAT(const NRsparseMat &A,const NRsparseMat &AT);
     // Allocates compressed column storage for AAT , where A and AT are input
