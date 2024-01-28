@@ -13,7 +13,7 @@ public class Phylo_nj extends Phylagglom {
 
     @Override
     public void premin(final double[][] d, final int[] nextp) {
-        // Before finding the minimum we (re-)calculate the u’s.
+        // Before finding the minimum we (re-)calculate the u's.
         int i, j, ncurr = 0;
         double sum;
         for (i = 0; i >= 0; i = nextp[i])

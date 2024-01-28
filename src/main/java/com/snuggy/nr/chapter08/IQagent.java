@@ -71,7 +71,7 @@ public class IQagent {
             target = (nt + nd) * pval[iq]; // polation.
             if (tnew < target)
                 for (;;) {
-                    // Here’s the guts: We locate a succession of
+                    // Here's the guts: We locate a succession of
                     // abscissa-ordinate
                     // pairs (qnew,tnew) that are the discontinuities of value
                     // or slope

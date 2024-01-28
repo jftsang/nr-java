@@ -57,7 +57,7 @@ public class Binomialdev extends Ran {
         int j, k, kl, km;
         double y, u, v, u2, v2, b;
         if (swch == 0) {
-            unfin = uo; // Mark all bits as ”unfinished.”
+            unfin = uo; // Mark all bits as 'unfinished.'
             for (j = 0; j < 5; j++) { // Compare with first five bits of p.
                 diff = unfin & (int64() ^ ((pbits[j] != 0) ? uo : uz)); // Mask
                                                                         // of

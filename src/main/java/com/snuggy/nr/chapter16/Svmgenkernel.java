@@ -10,8 +10,8 @@ public abstract class Svmgenkernel {
     @SuppressWarnings("unused")
     private int kcalls;
     private final double[][] ker; // Locally stored kernel matrix.
-    private final double[] y; // Must provide reference to the yi ’s.
-    protected final double[][] data; // Must provide reference to the xi ’s.
+    private final double[] y; // Must provide reference to the yi 's.
+    protected final double[][] data; // Must provide reference to the xi 's.
 
     public Svmgenkernel(final double[] yy, final double[][] ddata) {
         // Every kernel structure must provide a kernel function that returns
@@ -33,7 +33,7 @@ public abstract class Svmgenkernel {
         return kernel(data[i], 0, xj_arr, xj_off);
     }
 
-    // Every kernel structure’s constructor must call fill to fill the ker
+    // Every kernel structure's constructor must call fill to fill the ker
     // matrix.
 
     void fill() {

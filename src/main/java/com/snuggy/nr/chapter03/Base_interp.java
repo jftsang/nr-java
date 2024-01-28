@@ -26,7 +26,7 @@ public abstract class Base_interp {
     }
 
     public Base_interp(final double[] x, final $double y, final int m) {
-        // Constructor: Set up for interpolating on a table of x’s and y’s
+        // Constructor: Set up for interpolating on a table of x's and y's
         // of length m. Normally called by a derived class, not by the user.
         n = (x.length);
         mm = (m);

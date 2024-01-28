@@ -76,7 +76,7 @@ public class Gamma extends Gauleg18 {
         double an, b, c, d, del, h;
         gln = gammln(a);
         b = x + 1.0 - a; // Set up for evaluating continued fraction
-        // by modified Lentz’s method (5.2) with b0 D 0.
+        // by modified Lentz's method (5.2) with b0 D 0.
         c = 1.0 / FPMIN;
         d = 1.0 / b;
         h = d;
@@ -159,7 +159,7 @@ public class Gamma extends Gauleg18 {
             else
                 t = exp(-x + a1 * log(x) - gln);
             u = err / t;
-            x -= (t = u / (1. - 0.5 * MIN(1., u * ((a - 1.) / x - 1)))); // Halley’s
+            x -= (t = u / (1. - 0.5 * MIN(1., u * ((a - 1.) / x - 1)))); // Halley's
                                                                          // method.
             if (x <= 0.)
                 x = 0.5 * (x + t); // Halve old value if x tries to go negative.

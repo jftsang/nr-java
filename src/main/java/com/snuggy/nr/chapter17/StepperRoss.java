@@ -63,7 +63,7 @@ public class StepperRoss extends StepperBS {
                 first_step = false;
                 hold = h.$();
                 errold = MAX(0.01, err);
-                if (reject) // Don�t let step increase if last one was rejected.
+                if (reject) // Don't let step increase if last one was rejected.
                     hnew = (h.$() >= 0.0 ? MIN(hnew, h.$()) : MAX(hnew, h.$()));
                 hnext = hnew;
                 reject = false;
@@ -78,7 +78,7 @@ public class StepperRoss extends StepperBS {
 
     Controller con = new Controller();
 
-    // The implementation will seem very familiar if you�ve looked at
+    // The implementation will seem very familiar if you've looked at
     // StepperDopr5, the explicit Runge-Kutta routine. Note that in the
     // algorithm
     // routine dy of StepperRoss, the linear equations (17.5.32) are solved by

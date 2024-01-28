@@ -9,7 +9,7 @@ import com.snuggy.nr.util.*;
 public class NRsparseLinbcg extends Linbcg {
 
     // Here is an example of a derived class that solvesA x D b for a
-    // matrix A in NRsparseMat’s compressed column sparse format. A naive
+    // matrix A in NRsparseMat's compressed column sparse format. A naive
     // diagonal preconditioner is used.
 
     private NRsparseMat mat;
@@ -22,7 +22,7 @@ public class NRsparseLinbcg extends Linbcg {
 
     // The constructor just binds a reference to your sparse matrix, making
     // it available to asolve and atimes. To solve for a right-hand side,
-    // you call this object’s solve method, as defined in the base class.
+    // you call this object's solve method, as defined in the base class.
 
     public void atimes(final double[] x, final $$double1d r, final int itrnsp) throws NRException {
         if (itrnsp != 0)

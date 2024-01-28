@@ -10,7 +10,7 @@ import static com.snuggy.nr.refs.Refs.*;
 
 public class Powell<T extends Func_DoubVec_To_Doub> extends Linemethod<T> {
 
-    // Multidimensional minimization by Powell’s method.
+    // Multidimensional minimization by Powell's method.
     private int iter;
     protected double fret; // Value of the function at the minimum.
 

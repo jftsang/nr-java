@@ -60,8 +60,8 @@ public class Spline_interp extends Base_interp {
         double p, qn, sig, un;
         int n = y2.length;
         final double[] u = doub_vec(n - 1);
-        if (yp1 > 0.99e99) // The lower boundary condition is set either to be “
-            y2[0] = u[0] = 0.0; // natural”
+        if (yp1 > 0.99e99) // The lower boundary condition is set either to be '
+            y2[0] = u[0] = 0.0; // natural'
         else { // or else to have a specified first derivative.
             y2[0] = -0.5;
             u[0] = (3.0 / (xv[1] - xv[0]))
@@ -86,7 +86,7 @@ public class Spline_interp extends Base_interp {
                     sig * u[i - 1]) / p;
         }
         if (ypn > 0.99e99) // The upper boundary condition is set either to be
-            qn = un = 0.0; // “natural”
+            qn = un = 0.0; // 'natural'
         else { // or else to have a specified first derivative.
             qn = 0.5;
             un = (3.0 / (xv[n - 1] - xv[n - 2]))
@@ -100,11 +100,11 @@ public class Spline_interp extends Base_interp {
     }
 
     // Note that, unlike the previous object Poly_interp, Spline_interp stores
-    // data that depend on the contents of your array of yi ’s at its time of
-    // creation — a whole vector y2. Although we didn’t point it out, the
+    // data that depend on the contents of your array of yi 's at its time of
+    // creation ' a whole vector y2. Although we didn't point it out, the
     // previous interpolation object actually allowed the misuse of altering
     // the contents of their x and y arrays on the fly (as long as the lengths
-    // didn’t change). If you do that with Spline_interp, you’ll get definitely
+    // didn't change). If you do that with Spline_interp, you'll get definitely
     // wrong answers! The required rawinterp method, never called directly by
     // the users, uses the stored y2 and implements equation (3.3.3):
 
@@ -117,7 +117,7 @@ public class Spline_interp extends Base_interp {
         double y, h, b, a;
         h = xx.$_(khi) - xx.$_(klo);
         if (h == 0.0)
-            throw new NRException("Bad input to routine splint"); // The xa’s
+            throw new NRException("Bad input to routine splint"); // The xa's
                                                                   // must be dis
         a = (xx.$_(khi) - x) / h; // tinct.
         b = (x - xx.$_(klo)) / h; // Cubic spline polynomial is now

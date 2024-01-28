@@ -44,7 +44,7 @@ public class Static {
         // Returns the integral of the function or functor func from a to b.
         // The constants EPS can be set to the desired fractional accuracy and
         // JMAX so that 2 to the power JMAX-1 is the maximum allowed number of
-        // steps. Integration is performed by Simpson’s rule.
+        // steps. Integration is performed by Simpson's rule.
         final int JMAX = 20;
         double s, st, ost = 0.0, os = 0.0;
         Trapzd<T> t = new Trapzd<T>(func, a, b);
@@ -66,8 +66,8 @@ public class Static {
 
     public static <T extends Func_Doub_To_Doub> double qromb(final T func, final double a, final double b, final double eps) throws NRException {
         // Returns the integral of the function or functor func from a to b.
-        // Integration is performed by Romberg’s method of order 2K, where,
-        // e.g., K=2 is Simpson’s rule.
+        // Integration is performed by Romberg's method of order 2K, where,
+        // e.g., K=2 is Simpson's rule.
         final int JMAX = 20, JMAXP = JMAX + 1, K = 5;
         // Here EPS is the fractional accuracy desired, as determined by the
         // extrapolation error estimate; JMAX limits the total number of steps;
@@ -103,7 +103,7 @@ public class Static {
     public static <T extends Func_Doub_To_Doub> double qromo(final Midpnt<T> q, final double eps) throws NRException {
         // Romberg integration on an open interval. Returns the integral of a
         // function using any specified elementary quadrature algorithm q and
-        // Romberg’s method. Normally q will be an open formula, not evaluating
+        // Romberg's method. Normally q will be an open formula, not evaluating
         // the function at the endpoints. It is assumed that q triples the
         // number of steps on each call, and that its error series contains
         // only even powers of the number of steps. The routines midpnt,
@@ -167,7 +167,7 @@ public class Static {
             z = cos(3.141592654 * (i + 0.75) / (n + 0.5));
             // Starting with this approximation to the ith root, we enter the
             // main loop of refinement
-            // by Newton’s method.
+            // by Newton's method.
             do {
                 p1 = 1.0;
                 p2 = 0.0;
@@ -183,7 +183,7 @@ public class Static {
                 // one lower order.
                 pp = n * (z * p1 - p2) / (z * z - 1.0);
                 z1 = z;
-                z = z1 - p1 / pp; // Newton’s method.
+                z = z1 - p1 / pp; // Newton's method.
             } while (abs(z - z1) > EPS);
             x[i] = xm - xl * z; // Scale the root to the desired interval,
             x[n - 1 - i] = xm + xl * z; // and put in its symmetric counterpart.
@@ -214,7 +214,7 @@ public class Static {
                 z += ((1.0 + 2.55 * ai) / (1.9 * ai) + 1.26 * ai * alf / (1.0 + 3.5 * ai)) * (z - x[i - 2])
                         / (1.0 + 0.3 * alf);
             }
-            for (its = 0; its < MAXIT; its++) { // Refinement by Newton’s
+            for (its = 0; its < MAXIT; its++) { // Refinement by Newton's
                                                 // method.
                 p1 = 1.0;
                 p2 = 0.0;
@@ -229,7 +229,7 @@ public class Static {
                 // p2, the polynomial of one lower order.
                 pp = (n * p1 - (n + alf) * p2) / z;
                 z1 = z;
-                z = z1 - p1 / pp; // Newton’s formula.
+                z = z1 - p1 / pp; // Newton's formula.
                 if (abs(z - z1) <= EPS)
                     break;
             }
@@ -267,7 +267,7 @@ public class Static {
             } else { // Initial guess for the other roots.
                 z = 2.0 * z - x[i - 2];
             }
-            for (its = 0; its < MAXIT; its++) { // Refinement by Newton’s
+            for (its = 0; its < MAXIT; its++) { // Refinement by Newton's
                                                 // method.
                 p1 = PIM4;
                 p2 = 0.0;
@@ -286,7 +286,7 @@ public class Static {
                 // lower order.
                 pp = sqrt((double) (2 * n)) * p2;
                 z1 = z;
-                z = z1 - p1 / pp; // Newton’s formula.
+                z = z1 - p1 / pp; // Newton's formula.
                 if (abs(z - z1) <= EPS)
                     break;
             }
@@ -344,7 +344,7 @@ public class Static {
                 z = 3.0 * x[i - 1] - 3.0 * x[i - 2] + x[i - 3];
             }
             alfbet = alf + bet;
-            for (its = 1; its <= MAXIT; its++) { // Refinement by Newton’s
+            for (its = 1; its <= MAXIT; its++) { // Refinement by Newton's
                                                  // method.
                 temp = 2.0 + alfbet; // Start the recurrence with P0 and P1 to
                                      // avoid
@@ -368,7 +368,7 @@ public class Static {
                 // polynomial
                 // of one lower order.
                 z1 = z;
-                z = z1 - p1 / pp; // Newton’s formula.
+                z = z1 - p1 / pp; // Newton's formula.
                 if (abs(z - z1) <= EPS)
                     break;
             }

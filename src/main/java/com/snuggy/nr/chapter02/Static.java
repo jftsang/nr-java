@@ -47,9 +47,9 @@ public class Static {
             // element, is the .iC1/th column that is reduced, while indxr[i] is
             // the
             // row in which that pivot element was originally located.
-            // If indxr[i] ¤ indxc[i], there is an implied column interchange.
+            // If indxr[i] ' indxc[i], there is an implied column interchange.
             // With
-            // this form of bookkeeping, the solution b’s will end up in the
+            // this form of bookkeeping, the solution b's will end up in the
             // correct
             // order, and the inverse matrix will be scrambled by columns.
             if (irow != icol) {
@@ -145,7 +145,7 @@ public class Static {
 
     public static void cyclic(final double[] a, final double[] b, final double[] c, final double alpha, final double beta, final double[] r,
             final double[] x) throws NRException {
-        // Solves for a vector x[0..n-1] the “cyclic” set of linear equations
+        // Solves for a vector x[0..n-1] the 'cyclic' set of linear equations
         // given by equation (2.7.9). a, b, c, and r are input vectors, all
         // dimensioned as [0..n-1], while alpha and beta are the corner entries
         // in the matrix. The input is not modified.

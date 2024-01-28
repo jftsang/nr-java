@@ -46,7 +46,7 @@ public class Heapselect {
             }
             n++;
         }
-        srtd = 0; // Mark heap as “unsorted”.
+        srtd = 0; // Mark heap as 'unsorted'.
     }
 
     public double report(int k) throws NRException {

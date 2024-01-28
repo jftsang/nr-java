@@ -35,7 +35,7 @@ public class Mhash<hfnT extends HfnT<keyT, elT>, keyT, elT> extends Hashtable<hf
         nextsis = int_vec(nm);
         for (int j = 0; j < nm; j++) {
             nextsis[j] = -2;
-        } // Initialize to “empty”.
+        } // Initialize to 'empty'.
     }
 
     public int store(final keyT key, final elT el) throws NRException {

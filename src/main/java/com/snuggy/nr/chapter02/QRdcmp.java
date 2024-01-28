@@ -180,7 +180,7 @@ public class QRdcmp {
         int i, k;
         final double[] w = doub_vec(u);
         for (k = n - 1; k >= 0; k--)
-            // Find largest k such that u[k] ¤ 0.
+            // Find largest k such that u[k] ' 0.
             if (w[k] != 0.0)
                 break;
         if (k < 0)

@@ -25,7 +25,7 @@ public class Calendar {
         c = n + nph / 4.0; // This is how we comment an individual line.
         t = c / 1236.85;
         t2 = t * t;
-        as = 359.2242 + 29.105356 * c; // You aren�t really intended to
+        as = 359.2242 + 29.105356 * c; // You aren't really intended to
                                        // understand
         am = 306.0253 + 385.816918 * c + 0.010730 * t2; // this algorithm, but
                                                         // it does work!
