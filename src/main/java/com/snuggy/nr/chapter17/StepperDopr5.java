@@ -48,13 +48,13 @@ public class StepperDopr5 extends StepperBS {
             // Returns true if err  1, false otherwise. If step was successful,
             // sets hnext to the estimated optimal stepsize for the next step.
             // If the step failed, reduces h appropriately for another try.
-            // Set beta to a nonzero value for PI control. beta D 0:04�0.08 is a
+            // Set beta to a nonzero value for PI control. beta D 0:04'0.08 is a
             // good default.
             double scale;
             if (err <= 1.0) { // Step succeeded. Compute hnext.
                 if (err == 0.0)
                     scale = maxscale;
-                else { // PI control if beta � 0.
+                else { // PI control if beta ' 0.
                     scale = safe * pow(err, -alpha) * pow(errold, beta);
                     if (scale < minscale)
                         scale = minscale; // Ensure minscale  hnext=h 
@@ -62,7 +62,7 @@ public class StepperDopr5 extends StepperBS {
                     if (scale > maxscale)
                         scale = maxscale;
                 }
-                if (reject) // Don�t let step increase if last one was re
+                if (reject) // Don't let step increase if last one was re
                     hnext = h.$() * MIN(scale, 1.0); // jected.
                 else
                     hnext = h.$() * scale;

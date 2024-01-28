@@ -60,7 +60,7 @@ public class Static {
     }
 
     public static void newick(final Phylagglom p, final char[][] str, String filename) throws FileNotFoundException {
-        // Output a phylogenetic tree p in the “Newick” or “New Hampshire”
+        // Output a phylogenetic tree p in the 'Newick' or 'New Hampshire'
         // standard format. Text labels for the leaf nodes are input as the
         // rows of str, each a null terminated string. The output file name
         // is specified by filename.

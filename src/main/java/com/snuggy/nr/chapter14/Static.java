@@ -57,7 +57,7 @@ public class Static {
     public static void ttest(final double[] data1, final double[] data2, final $double t, final $double prob)
             throws NRException {
         // Given the arrays data1[0..n1-1] and data2[0..n2-1], returns
-        // Student’s t as t, and its pvalue as prob, small values of prob
+        // Student's t as t, and its pvalue as prob, small values of prob
         // indicating that the arrays have significantly different means. The
         // data arrays are assumed to be drawn from populations with the same
         // true variance.
@@ -98,7 +98,7 @@ public class Static {
     public static void tutest(final double[] data1, final double[] data2, final $double t, final $double prob)
             throws NRException {
         // Given the arrays data1[0..n1-1] and data2[0..n2-1], this routine
-        // returns Student’s t as t, and its p-value as prob, small values of
+        // returns Student's t as t, and its p-value as prob, small values of
         // prob indicating that the arrays have significantly different means.
         // The data arrays are allowed to be drawn from populations with
         // unequal variances.
@@ -117,7 +117,7 @@ public class Static {
     public static void tptest(final double[] data1, final double[] data2, final $double t, final $double prob)
             throws NRException {
         // Given the paired arrays data1[0..n-1] and data2[0..n-1], this routine
-        // returns Student’s t for paired data as t, and its p-value as prob,
+        // returns Student's t for paired data as t, and its p-value as prob,
         // small values of prob indicating a significant difference of means.
         Beta beta = new Beta();
         int j, n = data1.length;
@@ -236,7 +236,7 @@ public class Static {
         // Given an array data[0..n-1], and given a user-supplied function of a
         // single variable func that is a cumulative distribution function
         // ranging from 0 (for smallest values of its argument) to 1 (for
-        // largest values of its argument), this routine returns the K–S
+        // largest values of its argument), this routine returns the K'S
         // statistic d and the p-value prob. Small values of prob show that
         // the cumulative distribution function of data is significantly
         // different from func. The array data is modified by being sorted into
@@ -249,7 +249,7 @@ public class Static {
         en = n;
         d.$(0.0);
         for (j = 0; j < n; j++) { // Loop over the sorted data points.
-            fn = (j + 1) / en; // Data’s c.d.f. after this step.
+            fn = (j + 1) / en; // Data's c.d.f. after this step.
             ff = func.eval(data[j]); // Compare to the user-supplied function.
             dt = MAX(abs(fo - ff), abs(fn - ff)); // Maximum distance.
             if (dt > d.$())
@@ -263,7 +263,7 @@ public class Static {
     public static void kstwo(final double[] data1, final double[] data2, 
             final $double d, final $double prob) throws NRException {
         // Given an array data1[0..n1-1], and an array data2[0..n2-1], this
-        // routine returns the K–S statistic d and the p-value prob for the
+        // routine returns the K'S statistic d and the p-value prob for the
         // null hypothesis that the data sets are drawn from the same
         // distribution. Small values of prob show that the cumulative
         // distribution function of data1 is significantly different from that
@@ -300,7 +300,7 @@ public class Static {
         // nn[0..ni-1][0..nj-1] of integers, this routine returns the chi-square
         // chisq, the number of degrees of freedom df, the pvalue prob (small
         // values indicating a significant association), and two measures of
-        // association, Cramer’s V (cramrv) and the contingency coefficient C
+        // association, Cramer's V (cramrv) and the contingency coefficient C
         // (ccc).
         final double TINY = 1.0e-30; // A small number.
         Gamma gam = new Gamma();
@@ -353,7 +353,7 @@ public class Static {
         // their correlation coefficient r (returned as r), the p-value at
         // which the null hypothesis of zero correlation is disproved (prob
         // whose small value indicates a significant correlation), and
-        // Fisher’s z (returned as z), whose value can be used in further
+        // Fisher's z (returned as z), whose value can be used in further
         // statistical tests as described above.
         final double TINY = 1.0e-20; // Will regularize the unusual case of
         Beta beta = new Beta(); // complete correlation.
@@ -374,12 +374,12 @@ public class Static {
             sxy += xt * yt;
         }
         r.$(sxy / (sqrt(sxx * syy) + TINY));
-        z.$(0.5 * log((1.0 + r.$() + TINY) / (1.0 - r.$() + TINY))); // Fisher’s
+        z.$(0.5 * log((1.0 + r.$() + TINY) / (1.0 - r.$() + TINY))); // Fisher's
                                                                      // z transformation.
         df = n - 2;
         t = r.$() * sqrt(df / ((1.0 - r.$() + TINY) * (1.0 + r.$() + TINY))); // Equation
                                                                                        // (14.5.5).
-        prob.$(beta.betai(0.5 * df, 0.5, df / (df + t * t))); // Student’s
+        prob.$(beta.betai(0.5 * df, 0.5, df / (df + t * t))); // Student's
                                                                     // t
                                                                     // probability.
         // prob=erfcc(abs(z*sqrt(n-1.0))/1.4142136);
@@ -395,7 +395,7 @@ public class Static {
         // returns their sum squared difference of ranks as D, the number of
         // standard deviations by which D deviates from its null-hypothesis
         // expected value as zd, the two-sided p-value of this deviation as
-        // probd, Spearman’s rank correlation rs as rs, and the two-sided
+        // probd, Spearman's rank correlation rs as rs, and the two-sided
         // p-value of its deviation from zero as probrs. The external routines
         // crank (below) and sort2 (8.2) are used. A small value of either
         // probd or probrs indicates a significant correlation (rs positive) or
@@ -482,7 +482,7 @@ public class Static {
     public static void kendl1(final double[] data1, final double[] data2, 
             final $double tau, final $double z, final $double prob) {
         // Given data arrays data1[0..n-1] and data2[0..n-1], this program
-        // returns Kendall’s  as tau, its number of standard deviations from
+        // returns Kendall's  as tau, its number of standard deviations from
         // zero as z, and its two-sided p-value as prob. Small values of prob
         // indicate a significant correlation (tau positive) or anticorrelation
         // (tau negative).
@@ -504,9 +504,9 @@ public class Static {
                     ;
                 } else { // One or both arrays have ties.
                     if (a1 != 0.0)
-                        ++n1; // An “extra x” event.
+                        ++n1; // An 'extra x' event.
                     if (a2 != 0.0)
-                        ++n2; // An “extra y” event.
+                        ++n2; // An 'extra y' event.
                 }
             }
         }
@@ -521,7 +521,7 @@ public class Static {
             final $double tau, final $double z, final $double prob) {
         // Given a two-dimensional table tab[0..i-1][0..j-1], such that
         // tab[k][l] contains the number of events falling in bin k of one
-        // variable and bin l of another, this program returns Kendall’s  as
+        // variable and bin l of another, this program returns Kendall's  as
         // tau, its number of standard deviations from zero as z, and its
         // two-sided p-value as prob. Small values of prob indicate a
         // significant correlation (tau positive) or anticorrelation (tau
@@ -663,7 +663,7 @@ public class Static {
         fd.$(0.25 * qd * qa);
     }
 
-    // The routine ks2d2s is the two-sample case of the two-dimensional K–S
+    // The routine ks2d2s is the two-sample case of the two-dimensional K'S
     // test. It also calls quadct, pearsn, and KSdist::qks. Being a two-sample
     // test, it does not need an analytic model.
 
@@ -736,7 +736,7 @@ public class Static {
         // used, while nr is the number of rightward (future) data points,
         // making the total number of data points used nlCnrC1. ld is the order
         // of the derivative desired (e.g., ld D 0 for smoothed function. For
-        // the derivative of order k, you must multiply the array c by kŠ.) m
+        // the derivative of order k, you must multiply the array c by k'.) m
         // is the order of the smoothing polynomial, also equal to the highest
         // conserved moment; usual values are m D 2 or m D 4.
         int j, k, imj, ipj, kk, mm;

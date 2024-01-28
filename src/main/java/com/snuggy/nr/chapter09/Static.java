@@ -17,7 +17,7 @@ public class Static {
 
     public static <T extends Func_Doub_To_Doub> double zbrent(final T func, final double x1, final double x2,
             final double tol) throws NRException {
-        // Using Brent’s method, return the root of a function or functor func
+        // Using Brent's method, return the root of a function or functor func
         // known to lie between x1 and x2. The root will be refined until its
         // accuracy is tol.
         final int ITMAX = 100; // Maximum allowed number of iterations.
@@ -342,7 +342,7 @@ public class Static {
 
     public static <T extends Func_Doub_To_Doub> double zriddr(final T func, final double x1, final double x2,
             final double xacc) throws NRException {
-        // Using Ridders’ method, return the root of a function or functor func
+        // Using Ridders' method, return the root of a function or functor func
         // known to lie between x1 and x2. The root will be refined to an
         // approximate accuracy xacc.
         final int MAXIT = 60;
@@ -398,7 +398,7 @@ public class Static {
 
     /*
      * public static <T extends Func_Doub_To_Doub> double zbrent(final T func,
-     * final double x1, final double x2, final double tol) { // Using Brent’s
+     * final double x1, final double x2, final double tol) { // Using Brent's
      * method, return the root of a function or functor func // known to lie
      * between x1 and x2. The root will be refined until its // accuracy is tol.
      * final int ITMAX = 100; // Maximum allowed number of iterations. final
@@ -474,7 +474,7 @@ public class Static {
             xl = x2;
         }
         double rts = 0.5 * (x1 + x2); // Initialize the guess for root,
-        double dxold = abs(x2 - x1); // the “stepsize before last,”
+        double dxold = abs(x2 - x1); // the 'stepsize before last,'
         double dx = dxold; // and the last step.
         double f = funcd.eval(rts);
         double df = funcd.df(rts);
@@ -519,7 +519,7 @@ public class Static {
     public static void laguer(final Complex[] a, final $<Complex> x, final $int its) throws NRException {
         // Given the m+1 complex coefficients a[0..m] of the polynomial
         // Pmi D0 aOEi xi , and given a complex value x, this routine improves
-        // x by Laguerre’s method until it converges, within the achievable
+        // x by Laguerre's method until it converges, within the achievable
         // roundoff limit, to a root of the given polynomial. The number of
         // iterations taken is returned as its.
         final int MR = 8, MT = 10, MAXIT = MT * MR;
@@ -554,7 +554,7 @@ public class Static {
             // Estimate of roundoff error in evaluating polynomial.
             if (abs(b.$()) <= err)
                 return; // We are on the root.
-            // g=d/b; // The generic case: Use Laguerre’s formula.
+            // g=d/b; // The generic case: Use Laguerre's formula.
             $$(g, divide(d.$(), b.$()));
             // g2=g*g;
             $$(g2, times(g.$(), g.$()));
@@ -594,7 +594,7 @@ public class Static {
         // Pm
         // iD0 a.i/xi , this routine successively calls laguer and finds all
         // m complex roots in roots[0..m-1]. The boolean variable polish
-        // should be input as true if polishing (also by Laguerre’s method) is
+        // should be input as true if polishing (also by Laguerre's method) is
         // desired, false if the roots will be subsequently polished by other
         // means.
         final double EPS = 1.0e-14; // A small number.
@@ -745,7 +745,7 @@ public class Static {
         // Given an n-dimensional point xold[0..n-1], the value of the function
         // and gradient there, fold and g[0..n-1], and a direction p[0..n-1],
         // finds a new point x[0..n-1] along the direction p from xold where the
-        // function or functor func has decreased “sufficiently.” The new
+        // function or functor func has decreased 'sufficiently.' The new
         // function
         // value is returned in f. stpmax is an input quantity that limits the
         // length of the steps so that you do not try to evaluate the function
@@ -825,7 +825,7 @@ public class Static {
     public static <T extends Func_DoubVec_To_DoubVec> void newt(final double[] x, final $boolean check, final T vecfunc)
             throws NRException {
         // Given an initial guess x[0..n-1] for a root in n dimensions, find the
-        // root by a globally convergent Newton’s method. The vector of
+        // root by a globally convergent Newton's method. The vector of
         // functions
         // to be zeroed, called fvec[0..n-1] in the routine below, is returned
         // by the user-supplied function or functor vecfunc (see text). The
@@ -917,13 +917,13 @@ public class Static {
 
     public static <T extends Func_DoubVec_To_DoubVec> void broydn(final double[] x, final $boolean check, final T vecfunc) throws NRException {
         // Given an initial guess x[0..n-1] for a root in n dimensions, find
-        // the root by Broyden’s method embedded in a globally convergent
+        // the root by Broyden's method embedded in a globally convergent
         // strategy. The vector of functions to be zeroed, called fvec[0..n-1]
         // in the routine below, is returned by the user-supplied function or
         // functor vecfunc. The routines NRfdjac and NRfmin from newt are used.
         // The output quantity check is false on a normal return and true if the
         // routine has converged to a local minimum of the function fmin or if
-        // Broyden’s method can make no further progress. In this case try
+        // Broyden's method can make no further progress. In this case try
         // restarting from a different initial guess.
         final int MAXITS = 200;
         final double EPS = EPS(); // numeric_limits<double>::epsilon();
@@ -977,7 +977,7 @@ public class Static {
                     w[i] = fvec.$()[i] - fvcold[i] - sum;
                     if (abs(w[i]) >= EPS * (abs(fvec.$()[i]) + abs(fvcold[i])))
                         skip = false;
-                    // Don’t update with noisy components of w.
+                    // Don't update with noisy components of w.
                     else
                         w[i] = 0.0;
                 }

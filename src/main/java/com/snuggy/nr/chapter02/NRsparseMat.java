@@ -100,9 +100,9 @@ public class NRsparseMat implements ByValue<NRsparseMat> {
     }
 
     // The single most important use of a matrix in compressed column storage
-    // mode is to multiply a vector to its right. Don’t implement this by
+    // mode is to multiply a vector to its right. Don't implement this by
     // traversing the rows of A, which is extremely inefficient in this storage
-    // mode. Here’s the right way to do it:
+    // mode. Here's the right way to do it:
 
     public final double[] ax(final double[] x) {
         final double[] y = doub_vec(nrows);
@@ -156,7 +156,7 @@ public class NRsparseMat implements ByValue<NRsparseMat> {
             // Main loop.
             for (j = col_ptr[i]; j < col_ptr[i + 1]; j++) {
                 k = row_ind[j];
-                index = at.col_ptr[k] + count[k]; // Element’s position in
+                index = at.col_ptr[k] + count[k]; // Element's position in
                                                   // column of AT .
                 at.row_ind[index] = i;
                 at.val[index] = val[j];

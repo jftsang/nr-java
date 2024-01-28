@@ -12,7 +12,7 @@ public class Svmpolykernel extends Svmgenkernel {
 
     public Svmpolykernel(final double[][] ddata, final double[] yy, final double aa, final double bb, final double dd) {
         // Constructor is called with the m  n data matrix, the vector of yi
-        // ’s,
+        // 's,
         // length m, and the constants a, b, and d.
         super(yy, ddata);
         n = (ncols(data));

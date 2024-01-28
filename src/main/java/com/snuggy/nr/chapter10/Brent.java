@@ -11,7 +11,7 @@ import com.snuggy.nr.util.*;
 
 public class Brent extends Bracketmethod {
 
-    // Brent’s method to find a minimum.
+    // Brent's method to find a minimum.
     @SuppressWarnings("unused")
     private double xmin;
     private double fmin;
@@ -33,7 +33,7 @@ public class Brent extends Bracketmethod {
         // Given a function or functor f, and given a bracketing triplet of
         // abscissas ax, bx, cx (such that bx is between ax and cx, and f(bx)
         // is less than both f(ax) and f(cx)), this routine isolates the
-        // minimum to a fractional precision of about tol using Brent’s method.
+        // minimum to a fractional precision of about tol using Brent's method.
         // The abscissa of the minimum is returned as xmin, and the function
         // value at the minimum is returned as min, the returned function value.
         final int ITMAX = 100;

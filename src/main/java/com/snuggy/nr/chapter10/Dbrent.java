@@ -11,7 +11,7 @@ import com.snuggy.nr.util.*;
 
 public class Dbrent extends Bracketmethod {
 
-    // Brent’s method to find a minimum, modified to use derivatives.
+    // Brent's method to find a minimum, modified to use derivatives.
     @SuppressWarnings("unused")
     private double xmin, fmin;
     private final double tol;
@@ -30,7 +30,7 @@ public class Dbrent extends Bracketmethod {
         // function df, and given a bracketing triplet of abscissas ax, bx,
         // cx [such that bx is between ax and cx, and f(bx) is less than both
         // f(ax) and f(cx)], this routine isolates the minimum to a fractional
-        // precision of about tol using a modification of Brent’s method that
+        // precision of about tol using a modification of Brent's method that
         // uses derivatives. The abscissa of the minimum is returned as xmin,
         // and the minimum function value is returned as min, the returned
         // function value.
@@ -62,7 +62,7 @@ public class Dbrent extends Bracketmethod {
                 return xmin = x.$();
             }
             if (abs(e) > tol1) {
-                d1 = 2.0 * (b - a); // Initialize these d’s to an out-of-bracket
+                d1 = 2.0 * (b - a); // Initialize these d's to an out-of-bracket
                 d2 = d1; // value.
                 if (dw != dx)
                     d1 = (w.$() - x.$()) * dx.$() / (dx.$() - dw.$()); // Secant method with one
