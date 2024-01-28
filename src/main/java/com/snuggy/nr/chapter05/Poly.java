@@ -1,8 +1,9 @@
 package com.snuggy.nr.chapter05;
 
 import com.snuggy.nr.util.*;
+import java.util.function.DoubleUnaryOperator;
 
-public class Poly implements Func_Doub_To_Doub {
+public class Poly implements DoubleUnaryOperator {
 
     // Polynomial function object that binds a reference to a vector of
     // coefficients.
@@ -12,7 +13,7 @@ public class Poly implements Func_Doub_To_Doub {
         c = (cc);
     }
 
-    public double eval(final double x) {
+    public double applyAsDouble(final double x) {
         // Returns the value of the polynomial at x.
         int j;
         double p = c[j = c.length - 1];

@@ -9,13 +9,13 @@ import static java.lang.Math.*;
 import java.io.*;
 
 import com.snuggy.nr.chapter02.*;
-import com.snuggy.nr.chapter11.*;
 import com.snuggy.nr.refs.*;
 import com.snuggy.nr.util.*;
+import java.util.function.DoubleUnaryOperator;
 
 public class Static {
 
-    public static <T extends Func_Doub_To_Doub> double zbrent(final T func, final double x1, final double x2,
+    public static <T extends DoubleUnaryOperator> double zbrent(final T func, final double x1, final double x2,
             final double tol) throws NRException {
         // Using Brent's method, return the root of a function or functor func
         // known to lie between x1 and x2. The root will be refined until its
@@ -23,7 +23,7 @@ public class Static {
         final int ITMAX = 100; // Maximum allowed number of iterations.
         final double EPS = EPS(); // numeric_limits<Doub>::epsilon();
         // Machine floating-point precision.
-        double a = x1, b = x2, c = x2, d = 0.0, e = 0.0, fa = func.eval(a), fb = func.eval(b), fc, p, q, r, s, tol1, xm;
+        double a = x1, b = x2, c = x2, d = 0.0, e = 0.0, fa = func.applyAsDouble(a), fb = func.applyAsDouble(b), fc, p, q, r, s, tol1, xm;
         if ((fa > 0.0 && fb > 0.0) || (fa < 0.0 && fb < 0.0))
             throw new NRException("Root must be bracketed in zbrent");
         fc = fb;
@@ -78,12 +78,12 @@ public class Static {
                 b += d;
             else
                 b += SIGN(tol1, xm);
-            fb = func.eval(b);
+            fb = func.applyAsDouble(b);
         }
         throw new NRException("Maximum number of iterations exceeded in zbrent");
     }
 
-    public static <T extends Func_Doub_To_Doub> void scrsho(final T fx) throws NRException, NumberFormatException,
+    public static <T extends DoubleUnaryOperator> void scrsho(final T fx) throws NRException, NumberFormatException,
             IOException {
         // Graph the function or functor fx over the prompted-for interval
         // x1,x2. Query for another plot until the user signals satisfaction.
@@ -111,7 +111,7 @@ public class Static {
                                         // intervals. Find
                 xx[i] = x1 + i * (x2 - x1) / (RES - 1.); // the largest and
                                                          // smallest values.
-                yy[i] = fx.eval(xx[i]);
+                yy[i] = fx.applyAsDouble(xx[i]);
                 if (yy[i] > ymax)
                     ymax = yy[i];
                 if (yy[i] < ymin)
@@ -162,7 +162,7 @@ public class Static {
         }
     }
 
-    public static <T extends Func_Doub_To_Doub> boolean zbrac(final T func, final $double x1, final $double x2)
+    public static <T extends DoubleUnaryOperator> boolean zbrac(final T func, final $double x1, final $double x2)
             throws NRException {
         // Given a function or functor func and an initial guessed range x1 to
         // x2, the routine expands the range geometrically until a root is
@@ -173,23 +173,23 @@ public class Static {
         final double FACTOR = 1.6;
         if (x1 == x2)
             throw new NRException("Bad initial range in zbrac");
-        double f1 = func.eval(x1.$());
-        double f2 = func.eval(x2.$());
+        double f1 = func.applyAsDouble(x1.$());
+        double f2 = func.applyAsDouble(x2.$());
         for (int j = 0; j < NTRY; j++) {
             if (f1 * f2 < 0.0)
                 return true;
             if (abs(f1) < abs(f2)) {
                 x1.$(x1.$() + FACTOR * (x1.$() - x2.$()));
-                f1 = func.eval(x1.$());
+                f1 = func.applyAsDouble(x1.$());
             } else {
                 x2.$(x2.$() + FACTOR * (x2.$() - x1.$()));
-                f2 = func.eval(x2.$());
+                f2 = func.applyAsDouble(x2.$());
             }
         }
         return false;
     }
 
-    public static <T extends Func_Doub_To_Doub> void zbrak(final T fx, final double x1, final double x2, final int n,
+    public static <T extends DoubleUnaryOperator> void zbrak(final T fx, final double x1, final double x2, final int n,
             final $double1d xb1, final $double1d xb2, final $int nroot) throws NRException {
         // Given a function or functor fx defined on the interval [x1,x2],
         // subdivide the interval into n equally spaced segments, and search
@@ -207,9 +207,9 @@ public class Static {
         double dx = (x2 - x1) / n; // Determine the spacing appropriate to the
                                    // mesh.
         double x = x1;
-        double fp = fx.eval(x1);
+        double fp = fx.applyAsDouble(x1);
         for (int i = 0; i < n; i++) { // Loop over all intervals
-            double fc = fx.eval(x += dx);
+            double fc = fx.applyAsDouble(x += dx);
             if (fc * fp <= 0.0) { // If a sign change occurs, then record values
                                   // for the
                 xb1.$()[nroot.$()] = x - dx; // bounds.
@@ -232,15 +232,15 @@ public class Static {
         }
     }
 
-    public static <T extends Func_Doub_To_Doub> double rtbis(final T func, final double x1, final double x2,
+    public static <T extends DoubleUnaryOperator> double rtbis(final T func, final double x1, final double x2,
             final double xacc) throws NRException {
         // Using bisection, return the root of a function or functor func known
         // to lie between x1 and x2. The root will be refined until its accuracy
         // is xacc.
         final int JMAX = 50; // Maximum allowed number of bisections.
         double dx, xmid, rtb;
-        double f = func.eval(x1);
-        double fmid = func.eval(x2);
+        double f = func.applyAsDouble(x1);
+        double fmid = func.applyAsDouble(x2);
         if (f * fmid >= 0.0)
             throw new NRException("Root must be bracketed for bisection in rtbis");
         // rtb = f < 0.0 ? (dx=x2-x1,x1) : (dx=x1-x2,x2); // Orient the search
@@ -253,7 +253,7 @@ public class Static {
             rtb = (x2);
         }
         for (int j = 0; j < JMAX; j++) { // lies at x+dx.
-            fmid = func.eval(xmid = rtb + (dx *= 0.5)); // Bisection loop.
+            fmid = func.applyAsDouble(xmid = rtb + (dx *= 0.5)); // Bisection loop.
             if (fmid <= 0.0)
                 rtb = xmid;
             if (abs(dx) < xacc || fmid == 0.0)
@@ -262,7 +262,7 @@ public class Static {
         throw new NRException("Too many bisections in rtbis");
     }
 
-    public static <T extends Func_Doub_To_Doub> double rtflsp(final T func, final double x1, final double x2,
+    public static <T extends DoubleUnaryOperator> double rtflsp(final T func, final double x1, final double x2,
             final double xacc) throws NRException {
         // Using the false-position method, return the root of a function or
         // functor func known to lie between x1 and x2. The root is refined
@@ -270,8 +270,8 @@ public class Static {
         final int MAXIT = 30; // Set to the maximum allowed number of
                               // iterations.
         double xl, xh, del;
-        double fl = func.eval(x1);
-        double fh = func.eval(x2); // Be sure the interval brackets a root.
+        double fl = func.applyAsDouble(x1);
+        double fh = func.applyAsDouble(x2); // Be sure the interval brackets a root.
         if (fl * fh > 0.0)
             throw new NRException("Root must be bracketed in rtflsp");
         if (fl < 0.0) { // Identify the limits so that xl corresponds to the low
@@ -289,7 +289,7 @@ public class Static {
         for (int j = 0; j < MAXIT; j++) { // False-position loop.
             double rtf = xl + dx * fl / (fl - fh); // Increment with respect to
                                                    // latest value.
-            double f = func.eval(rtf);
+            double f = func.applyAsDouble(rtf);
             if (f < 0.0) { // Replace appropriate limit.
                 del = xl - rtf;
                 xl = rtf;
@@ -306,15 +306,15 @@ public class Static {
         throw new NRException("Maximum number of iterations exceeded in rtflsp");
     }
 
-    public static <T extends Func_Doub_To_Doub> double rtsec(final T func, final double x1, final double x2,
+    public static <T extends DoubleUnaryOperator> double rtsec(final T func, final double x1, final double x2,
             final double xacc) throws NRException {
         // Using the secant method, return the root of a function or functor
         // func thought to lie between x1 and x2. The root is refined until its
         // accuracy is xacc.
         final int MAXIT = 30; // Maximum allowed number of iterations.
         double xl, rts;
-        double fl = func.eval(x1);
-        double f = func.eval(x2);
+        double fl = func.applyAsDouble(x1);
+        double f = func.applyAsDouble(x2);
         if (abs(fl) < abs(f)) { // Pick the bound with the smaller function
                                 // value as
             rts = x1; // the most recent guess.
@@ -333,21 +333,21 @@ public class Static {
             xl = rts;
             fl = f;
             rts += dx;
-            f = func.eval(rts);
+            f = func.applyAsDouble(rts);
             if (abs(dx) < xacc || f == 0.0)
                 return rts; // Convergence.
         }
         throw new NRException("Maximum number of iterations exceeded in rtsec");
     }
 
-    public static <T extends Func_Doub_To_Doub> double zriddr(final T func, final double x1, final double x2,
+    public static <T extends DoubleUnaryOperator> double zriddr(final T func, final double x1, final double x2,
             final double xacc) throws NRException {
         // Using Ridders' method, return the root of a function or functor func
         // known to lie between x1 and x2. The root will be refined to an
         // approximate accuracy xacc.
         final int MAXIT = 60;
-        double fl = func.eval(x1);
-        double fh = func.eval(x2);
+        double fl = func.applyAsDouble(x1);
+        double fh = func.applyAsDouble(x2);
         if ((fl > 0.0 && fh < 0.0) || (fl < 0.0 && fh > 0.0)) {
             double xl = x1;
             double xh = x2;
@@ -355,7 +355,7 @@ public class Static {
                                    // logic
             for (int j = 0; j < MAXIT; j++) { // below.
                 double xm = 0.5 * (xl + xh);
-                double fm = func.eval(xm); // First of two function evaluations
+                double fm = func.applyAsDouble(xm); // First of two function evaluations
                                            // per it
                 double s = sqrt(fm * fm - fl * fh); // eration.
                 if (s == 0.0)
@@ -365,7 +365,7 @@ public class Static {
                 if (abs(xnew - ans) <= xacc)
                     return ans;
                 ans = xnew;
-                double fnew = func.eval(ans); // Second of two function
+                double fnew = func.applyAsDouble(ans); // Second of two function
                                               // evaluations per
                 if (fnew == 0.0)
                     return ans; // iteration.
@@ -436,7 +436,7 @@ public class Static {
         final int JMAX = 20; // Set to maximum number of iterations.
         double rtn = 0.5 * (x1 + x2); // Initial guess.
         for (int j = 0; j < JMAX; j++) {
-            double f = funcd.eval(rtn);
+            double f = funcd.applyAsDouble(rtn);
             double df = funcd.df(rtn);
             double dx = f / df;
             rtn -= dx;
@@ -458,8 +458,8 @@ public class Static {
         // text).
         final int MAXIT = 100; // Maximum allowed number of iterations.
         double xh, xl;
-        double fl = funcd.eval(x1);
-        double fh = funcd.eval(x2);
+        double fl = funcd.applyAsDouble(x1);
+        double fh = funcd.applyAsDouble(x2);
         if ((fl > 0.0 && fh > 0.0) || (fl < 0.0 && fh < 0.0))
             throw new NRException("Root must be bracketed in rtsafe");
         if (fl == 0.0)
@@ -476,7 +476,7 @@ public class Static {
         double rts = 0.5 * (x1 + x2); // Initialize the guess for root,
         double dxold = abs(x2 - x1); // the 'stepsize before last,'
         double dx = dxold; // and the last step.
-        double f = funcd.eval(rts);
+        double f = funcd.applyAsDouble(rts);
         double df = funcd.df(rts);
         for (int j = 0; j < MAXIT; j++) { // Loop over allowed iterations.
             if ((((rts - xh) * df - f) * ((rts - xl) * df - f) > 0.0) // Bisect
@@ -501,7 +501,7 @@ public class Static {
             }
             if (abs(dx) < xacc)
                 return rts; // Convergence criterion.
-            double f_ = funcd.eval(rts);
+            double f_ = funcd.applyAsDouble(rts);
             @SuppressWarnings("unused")
             double df_ = funcd.df(rts);
             // The one new function evaluation per iteration.

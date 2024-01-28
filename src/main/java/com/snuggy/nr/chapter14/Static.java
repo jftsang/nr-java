@@ -11,6 +11,7 @@ import com.snuggy.nr.chapter02.*;
 import com.snuggy.nr.chapter06.*;
 import com.snuggy.nr.refs.*;
 import com.snuggy.nr.util.*;
+import java.util.function.DoubleUnaryOperator;
 
 public class Static {
 
@@ -231,7 +232,7 @@ public class Static {
                                                                      // 6.2.
     }
 
-    public static void ksone(final double[] data, Func_Doub_To_Doub func, 
+    public static void ksone(final double[] data, DoubleUnaryOperator func,
             final $double d, final $double prob) throws NRException {
         // Given an array data[0..n-1], and given a user-supplied function of a
         // single variable func that is a cumulative distribution function
@@ -250,7 +251,7 @@ public class Static {
         d.$(0.0);
         for (j = 0; j < n; j++) { // Loop over the sorted data points.
             fn = (j + 1) / en; // Data's c.d.f. after this step.
-            ff = func.eval(data[j]); // Compare to the user-supplied function.
+            ff = func.applyAsDouble(data[j]); // Compare to the user-supplied function.
             dt = MAX(abs(fo - ff), abs(fn - ff)); // Maximum distance.
             if (dt > d.$())
                 d.$(dt);

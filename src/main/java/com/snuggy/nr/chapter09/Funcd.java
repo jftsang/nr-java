@@ -2,7 +2,8 @@
 package com.snuggy.nr.chapter09;
 
 import com.snuggy.nr.util.*;
+import java.util.function.DoubleUnaryOperator;
 
-public interface Funcd extends Func_Doub_To_Doub {
+public interface Funcd extends DoubleUnaryOperator {
     double df(final double x);
 }

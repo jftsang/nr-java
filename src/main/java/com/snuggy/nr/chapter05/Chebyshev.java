@@ -7,8 +7,9 @@ import static java.lang.Math.*;
 
 import com.snuggy.nr.refs.*;
 import com.snuggy.nr.util.*;
+import java.util.function.DoubleUnaryOperator;
 
-public class Chebyshev implements Func_Doub_To_Doub, ByValue<Chebyshev> {
+public class Chebyshev implements DoubleUnaryOperator, ByValue<Chebyshev> {
 
     // Object for Chebyshev approximation and related methods.
     private int n, m; // Number of total, and truncated, coefficients.
@@ -59,8 +60,12 @@ public class Chebyshev implements Func_Doub_To_Doub, ByValue<Chebyshev> {
     // thresh, and return the value set.
     // Doub eval(Doub x, Int m);
 
-    public double eval(final double x) throws NRException {
-        return eval(x, m);
+    public double applyAsDouble(final double x) {
+        try {
+            return eval(x, m);
+        } catch (NRException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     // Return a value for the Chebyshev fit, either using the stored m or else
@@ -76,11 +81,11 @@ public class Chebyshev implements Func_Doub_To_Doub, ByValue<Chebyshev> {
 
     // Chebyshev(VecDoub &pc); // See 5.11.
 
-    public Chebyshev(Func_Doub_To_Doub func, final double aa, final double bb) throws NRException {
+    public Chebyshev(DoubleUnaryOperator func, final double aa, final double bb) throws NRException {
         this(func, aa, bb, 50);
     }
 
-    public Chebyshev(Func_Doub_To_Doub func, final double aa, final double bb, final int nn) throws NRException {
+    public Chebyshev(DoubleUnaryOperator func, final double aa, final double bb, final int nn) throws NRException {
         // Chebyshev fit: Given a function func, lower and upper limits of the
         // interval [a,b], compute and save nn coefficients of the Chebyshev
         // approximation such that func.x/ OE
@@ -104,7 +109,7 @@ public class Chebyshev implements Func_Doub_To_Doub, ByValue<Chebyshev> {
         for (k = 0; k < n; k++) { // We evaluate the function at the n points
                                   // required
             y = cos(pi * (k + 0.5) / n); // by (5.8.7).
-            f[k] = func.eval(y * bma + bpa);
+            f[k] = func.applyAsDouble(y * bma + bpa);
         }
         fac = 2.0 / n;
         for (j = 0; j < n; j++) { // Now evaluate (5.8.7).

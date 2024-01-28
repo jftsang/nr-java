@@ -5,8 +5,9 @@ import static com.snuggy.nr.util.Static.*;
 import static java.lang.Math.*;
 
 import com.snuggy.nr.util.*;
+import java.util.function.DoubleUnaryOperator;
 
-public class Powvargram implements Func_Doub_To_Doub {
+public class Powvargram implements DoubleUnaryOperator {
 
     // Functor for variogram v.r/ D ?r?, where ? is specified, ? is fitted
     // from the data.
@@ -43,7 +44,7 @@ public class Powvargram implements Func_Doub_To_Doub {
         alph = num / denom;
     }
 
-    public double eval(final double r) {
+    public double applyAsDouble(final double r) {
         return nugsq + alph * pow(r, bet);
     }
 

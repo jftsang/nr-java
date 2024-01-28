@@ -11,6 +11,7 @@ import com.snuggy.nr.chapter06.*;
 import com.snuggy.nr.chapter10.*;
 import com.snuggy.nr.refs.*;
 import com.snuggy.nr.util.*;
+import java.util.function.DoubleUnaryOperator;
 
 public class Fitexy {
 
@@ -102,7 +103,7 @@ public class Fitexy {
         ang[4] = ang[1];
         ang[5] = POTN;
         for (j = 3; j < 6; j++)
-            ch[j] = chixy.eval(ang[j]);
+            ch[j] = chixy.applyAsDouble(ang[j]);
         // Bracket the 2 minimum and then locate it with brent.
         brent.bracket(ang[0], ang[1], chixy);
         ang[0] = brent.ax();
@@ -112,7 +113,7 @@ public class Fitexy {
         ch[1] = brent.fb();
         ch[2] = brent.fc();
         b = brent.minimize(chixy);
-        chi2 = chixy.eval(b);
+        chi2 = chixy.applyAsDouble(b);
         a = aa.$();
         q = gam.gammq(0.5 * (ndat - 2), chi2 * 0.5); // Compute 2 probability.
         r2 = 0.0;
@@ -165,7 +166,7 @@ public class Fitexy {
         y.$(t);
     }
 
-    class Chixy implements Func_Doub_To_Doub {
+    class Chixy implements DoubleUnaryOperator {
         // Captive functor of Fitexy, returns the value of .2 offs/ for the
         // slope b=tan(bang). Scaled data and offs are communicated via bound
         // references.
@@ -185,7 +186,7 @@ public class Fitexy {
 
         // Constructor. Bind references back to Fitexy.
 
-        public double eval(final double bang) {
+        public double applyAsDouble(final double bang) {
             // The function as seen by Brent and zbrent.
             final double BIG = 1.0e30;
             int j, nn = xx.length;

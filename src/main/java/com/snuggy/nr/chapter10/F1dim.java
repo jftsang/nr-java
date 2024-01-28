@@ -4,8 +4,9 @@ package com.snuggy.nr.chapter10;
 import static com.snuggy.nr.util.Static.*;
 
 import com.snuggy.nr.util.*;
+import java.util.function.DoubleUnaryOperator;
 
-public class F1dim<T extends Func_DoubVec_To_Doub> implements Func_Doub_To_Doub {
+public class F1dim<T extends Func_DoubVec_To_Doub> implements DoubleUnaryOperator {
 
     // Must accompany linmin in Linemethod.
     private final double[] p;
@@ -25,12 +26,16 @@ public class F1dim<T extends Func_DoubVec_To_Doub> implements Func_Doub_To_Doub 
         xt = doub_vec(n);
     }
 
-    public double eval(final double x) throws NRException {
+    public double applyAsDouble(final double x) {
         // Functor returning value of the given function along a one-dimensional
         // line.
         for (int j = 0; j < n; j++)
             xt[j] = p[j] + x * xi[j];
-        return func.eval(xt);
+        try {
+            return func.eval(xt);
+        } catch (NRException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 }

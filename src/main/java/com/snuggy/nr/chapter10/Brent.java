@@ -8,6 +8,7 @@ import static java.lang.Math.*;
 
 import com.snuggy.nr.refs.*;
 import com.snuggy.nr.util.*;
+import java.util.function.DoubleUnaryOperator;
 
 public class Brent extends Bracketmethod {
 
@@ -29,7 +30,7 @@ public class Brent extends Bracketmethod {
         return fmin;
     }
 
-    public <T extends Func_Doub_To_Doub> double minimize(final T func) throws NRException {
+    public <T extends DoubleUnaryOperator> double minimize(final T func) throws NRException {
         // Given a function or functor f, and given a bracketing triplet of
         // abscissas ax, bx, cx (such that bx is between ax and cx, and f(bx)
         // is less than both f(ax) and f(cx)), this routine isolates the
@@ -58,7 +59,7 @@ public class Brent extends Bracketmethod {
                                                              // abscissas need
                                                              // not be.
         $(x, $(w, $(v, bx))); // Initializations...
-        $(fw, $(fv, $(fx, func.eval(x.$()))));
+        $(fw, $(fv, $(fx, func.applyAsDouble(x.$()))));
         for (int iter = 0; iter < ITMAX; iter++) { // Main program loop.
             xm = 0.5 * (a + b);
             tol2 = 2.0 * (tol1 = tol * abs(x.$()) + ZEPS);
@@ -93,7 +94,7 @@ public class Brent extends Bracketmethod {
                 d = CGOLD * (e = (x.$() >= xm ? a - x.$() : b - x.$()));
             }
             $(u, (abs(d) >= tol1 ? x.$() + d : x.$() + SIGN(tol1, d)));
-            $(fu, func.eval(u.$()));
+            $(fu, func.applyAsDouble(u.$()));
             // This is the one function evaluation per iteration.
             if (fu.$() <= fx.$()) { // Now decide what to do with our func
                 if (u.$() >= x.$())

@@ -8,6 +8,7 @@ import static java.lang.Math.*;
 import com.snuggy.nr.chapter02.*;
 import com.snuggy.nr.refs.*;
 import com.snuggy.nr.util.*;
+import java.util.function.DoubleUnaryOperator;
 
 public class Static {
 
@@ -63,7 +64,7 @@ public class Static {
             r.$()[j] = 0.0;
     }
 
-    public static <T extends Func_Doub_To_Doub> double dfridr(T func, final double x, final double h,
+    public static <T extends DoubleUnaryOperator> double dfridr(T func, final double x, final double h,
             final $double err) throws NRException {
         // Returns the derivative of a function func at a point x by Ridders'
         // method of polynomial extrapolation. The value h is input as an
@@ -81,14 +82,14 @@ public class Static {
         if (h == 0.0)
             throw new NRException("h must be nonzero in dfridr.");
         hh = h;
-        a[0][0] = (func.eval(x + hh) - func.eval(x - hh)) / (2.0 * hh);
+        a[0][0] = (func.applyAsDouble(x + hh) - func.applyAsDouble(x - hh)) / (2.0 * hh);
         err.$(big);
         for (i = 1; i < ntab; i++) {
             // Successive columns in the Neville tableau will go to smaller
             // stepsizes and higher orders of extrapolation.
             hh /= con;
             // Try new, smaller stepsize.
-            a[0][i] = (func.eval(x + hh) - func.eval(x - hh)) / (2.0 * hh);
+            a[0][i] = (func.applyAsDouble(x + hh) - func.applyAsDouble(x - hh)) / (2.0 * hh);
             fac = con2;
             for (j = 1; j <= i; j++) { // Compute extrapolations of various
                                        // orders, requiring
@@ -181,7 +182,7 @@ public class Static {
         return new Ratfn(num, denom);
     }
 
-    public static $$<Ratfn> ratlsq(final Func_Doub_To_Doub fn, 
+    public static $$<Ratfn> ratlsq(final DoubleUnaryOperator fn,
             final double a, final double b, final int mm,
             final int kk, final $double dev) throws NRException {
         // Returns a rational function approximation to the function fn in the
@@ -209,7 +210,7 @@ public class Static {
                 hth = PIO2 * (npt - i) / (npt - 1.0);
                 xs[i] = b - (b - a) * SQR(sin(hth));
             }
-            fs[i] = fn.eval(xs[i]);
+            fs[i] = fn.applyAsDouble(xs[i]);
             wt[i] = 1.0; // In later iterations we will adjust these weights to
             ee[i] = 1.0; // combat the largest deviations.
         }

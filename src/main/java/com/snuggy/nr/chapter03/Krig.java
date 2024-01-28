@@ -7,8 +7,9 @@ import static java.lang.Math.*;
 import com.snuggy.nr.chapter02.*;
 import com.snuggy.nr.refs.*;
 import com.snuggy.nr.util.*;
+import java.util.function.DoubleUnaryOperator;
 
-public class Krig<T extends Func_Doub_To_Doub> {
+public class Krig<T extends DoubleUnaryOperator> {
 
     // Object for interpolation by kriging, using npt points in ndim
     // dimensions. Call constructor once, then interp as many times as desired.
@@ -45,7 +46,7 @@ public class Krig<T extends Func_Doub_To_Doub> {
         for (i = 0; i < npt; i++) { // Fill Y and V.
             y[i] = yy[i];
             for (j = i; j < npt; j++) {
-                v[i][j] = v[j][i] = vgram.eval(rdist(x[i], 0, x[j], 0));
+                v[i][j] = v[j][i] = vgram.applyAsDouble(rdist(x[i], 0, x[j], 0));
             }
             v[i][npt] = v[npt][i] = 1.;
         }
@@ -63,7 +64,7 @@ public class Krig<T extends Func_Doub_To_Doub> {
         // Return an interpolated value at the point xstar.
         int i;
         for (i = 0; i < npt; i++)
-            vstar[i] = vgram.eval(rdist(xstar, 0, x[i], 0));
+            vstar[i] = vgram.applyAsDouble(rdist(xstar, 0, x[i], 0));
         vstar[npt] = 1.;
         lastval = 0.;
         for (i = 0; i <= npt; i++)

@@ -7,6 +7,7 @@ import com.snuggy.nr.util.*;
 import static com.snuggy.nr.refs.Refs.*;
 
 import com.snuggy.nr.refs.*;
+import java.util.function.DoubleUnaryOperator;
 
 public class Golden extends Bracketmethod {
 
@@ -24,7 +25,7 @@ public class Golden extends Bracketmethod {
         tol = (toll);
     }
 
-    public <T extends Func_Doub_To_Doub> double minimize(final T func) throws NRException {
+    public <T extends DoubleUnaryOperator> double minimize(final T func) throws NRException {
         // Given a function or functor f, and given a bracketing triplet of
         // abscissas ax, bx, cx (such that bx is between ax and cx, and f(bx)
         // is less than both f(ax) and f(cx)), this routine performs a golden
@@ -45,18 +46,18 @@ public class Golden extends Bracketmethod {
             $(x2, bx);
             x1.$(bx.$() - C * (bx.$() - ax.$()));
         }
-        $double f1 = $(func.eval(x1.$())); // The initial function evaluations.
+        $double f1 = $(func.applyAsDouble(x1.$())); // The initial function evaluations.
                                            // Note that
         // we never need to evaluate the function at the original endpoints.
-        $double f2 = $(func.eval(x2.$()));
+        $double f2 = $(func.applyAsDouble(x2.$()));
         while (abs(x3.$() - x0.$()) > tol * (abs(x1.$()) + abs(x2.$()))) {
             if (f2.$() < f1.$()) { // One possible outcome,
                 shft3(x0, x1, x2, R * x2.$() + C * x3.$()); // its housekeeping,
-                shft2(f1, f2, func.eval(x2.$())); // and a new function
+                shft2(f1, f2, func.applyAsDouble(x2.$())); // and a new function
                                                   // evaluation.
             } else { // The other outcome,
                 shft3(x3, x2, x1, R * x1.$() + C * x0.$());
-                shft2(f2, f1, func.eval(x1.$())); // and its new function
+                shft2(f2, f1, func.applyAsDouble(x1.$())); // and its new function
                                                   // evaluation.
             }
         } // Back to see if we are done.

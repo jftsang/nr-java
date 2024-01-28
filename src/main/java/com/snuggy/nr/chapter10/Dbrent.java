@@ -49,7 +49,7 @@ public class Dbrent extends Bracketmethod {
         a = (ax.$() < cx.$() ? ax.$() : cx.$());
         b = (ax.$() > cx.$() ? ax.$() : cx.$());
         $(x, $(w, $(v, bx)));
-        $(fw, $(fv, $(fx, funcd.eval(x.$()))));
+        $(fw, $(fv, $(fx, funcd.applyAsDouble(x.$()))));
         $(dw, $(dv, $(dx, funcd.df(x.$())))); // All our housekeeping chores are doubled
         // by the necessity of moving aorund derivative values as well
         // as function values.
@@ -103,10 +103,10 @@ public class Dbrent extends Bracketmethod {
             }
             if (abs(d) >= tol1) {
                 u = x.$() + d;
-                fu = funcd.eval(u);
+                fu = funcd.applyAsDouble(u);
             } else {
                 u = x.$() + SIGN(tol1, d);
-                fu = funcd.eval(u);
+                fu = funcd.applyAsDouble(u);
                 if (fu > fx.$()) { // If the minimum step in the downhill
                     // direction takes us uphill, then we are done.
                     fmin = fx.$();

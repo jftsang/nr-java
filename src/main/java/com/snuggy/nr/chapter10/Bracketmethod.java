@@ -7,6 +7,7 @@ import static java.lang.Math.*;
 
 import com.snuggy.nr.refs.*;
 import com.snuggy.nr.util.*;
+import java.util.function.DoubleUnaryOperator;
 
 public class Bracketmethod {
 
@@ -43,7 +44,7 @@ public class Bracketmethod {
         return fc.$();
     }
 
-    public <T extends Func_Doub_To_Doub> void bracket(final double a, final double b, final T func) throws NRException {
+    public <T extends DoubleUnaryOperator> void bracket(final double a, final double b, final T func) throws NRException {
         // Given a function or functor func, and given distinct initial points
         // ax and bx, this routine searches in the downhill direction (defined
         // by the function as evaluated at the initial points) and returns new
@@ -56,8 +57,8 @@ public class Bracketmethod {
         $(ax, a);
         $(bx, b);
         $double fu = $(0.0);
-        $(fa, func.eval(ax.$()));
-        $(fb, func.eval(bx.$()));
+        $(fa, func.applyAsDouble(ax.$()));
+        $(fb, func.applyAsDouble(bx.$()));
         if (fb.$() > fa.$()) { // Switch roles of a and b so that we can
                                      // go
             // SWAP(ax,bx); // downhill in the direction from a to b.
@@ -67,7 +68,7 @@ public class Bracketmethod {
         }
         $(cx, bx.$() + GOLD * (bx.$() - ax.$())); // First guess
                                                                 // for c.
-        $(fc, func.eval(cx.$()));
+        $(fc, func.applyAsDouble(cx.$()));
         while (fb.$() > fc.$()) { // Keep returning here until we bracket.
             double r = (bx.$() - ax.$()) * (fb.$() - fc.$()); // Compute
                                                                           // u
@@ -89,7 +90,7 @@ public class Bracketmethod {
                                                                          // c:
                                                                          // try
                                                                          // it.
-                $(fu, func.eval(u.$()));
+                $(fu, func.applyAsDouble(u.$()));
                 if (fu.$() < fc.$()) { // Got a minimum between b and c.
                     $(ax, bx);
                     $(bx, u);
@@ -109,27 +110,27 @@ public class Bracketmethod {
                                                                        // Use
                                                                        // default
                                                                        // mag
-                $(fu, func.eval(u.$())); // nification.
+                $(fu, func.applyAsDouble(u.$())); // nification.
             } else if ((cx.$() - u.$()) * (u.$() - ulim) > 0.0) { // Parabolic
                                                                            // fit
                                                                            // is
                                                                            // between
                                                                            // c
                                                                            // and
-                $(fu, func.eval(u.$())); // its allowed limit.
+                $(fu, func.applyAsDouble(u.$())); // its allowed limit.
                 if (fu.$() < fc.$()) {
                     shft3(bx, cx, u, u.$() + GOLD * (u.$() - cx.$()));
-                    shft3(fb, fc, fu, func.eval(u.$()));
+                    shft3(fb, fc, fu, func.applyAsDouble(u.$()));
                 }
             } else if ((u.$() - ulim) * (ulim - cx.$()) >= 0.0) { // Limit
                                                                         // parabolic
                                                                         // u to
                                                                         // maximum
                 u.$(ulim); // allowed value.
-                $(fu, func.eval(u.$()));
+                $(fu, func.applyAsDouble(u.$()));
             } else { // Reject parabolic u, use default magnifica
                 $(u, cx.$() + GOLD * (cx.$() - bx.$())); // tion.
-                $(fu, func.eval(u.$()));
+                $(fu, func.applyAsDouble(u.$()));
             }
             shft3(ax, bx, cx, u.$()); // Eliminate oldest point
                                                      // and continue.
