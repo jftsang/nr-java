@@ -7,7 +7,7 @@ import static java.lang.Math.*;
 import com.snuggy.nr.chapter02.*;
 import com.snuggy.nr.util.*;
 
-public class RBF_interp {
+public class RBFInterpolation {
 
     // Object for radial basis function interpolation using n points in dim
     // dimensions. Call constructor once, then interp as many times as desired.
@@ -19,12 +19,12 @@ public class RBF_interp {
     private RBF_fn fn;
     private boolean norm;
 
-    public RBF_interp(final double[][] ptss, final double[] valss, final RBF_fn func) 
+    public RBFInterpolation(final double[][] ptss, final double[] valss, final RBF_fn func)
             throws NRException {
         this(ptss, valss, func, false);
     }
 
-    public RBF_interp(final double[][] ptss, final double[] valss, final RBF_fn func, final boolean nrbf) 
+    public RBFInterpolation(final double[][] ptss, final double[] valss, final RBF_fn func, final boolean nrbf)
             throws NRException {
         // Constructor. The n  dim matrix ptss inputs the data points, the
         // vector valss the function values. func contains the chosen radial

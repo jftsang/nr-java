@@ -6,7 +6,7 @@ import static com.snuggy.nr.util.Static.*;
 
 import com.snuggy.nr.util.*;
 
-public class Spline_interp extends Base_interp {
+public class SplineInterpolation extends BaseInterpolation {
 
     // Cubic spline interpolation object. Construct with x and y vectors,
     // and (optionally) values of the first derivative at the endpoints, then
@@ -14,15 +14,15 @@ public class Spline_interp extends Base_interp {
 
     private final double[] y2;
 
-    public Spline_interp(final double[] xv, final double[] yv) throws NRException {
+    public SplineInterpolation(final double[] xv, final double[] yv) throws NRException {
         this(xv, yv, 1.e99, 1.e99);
     }
 
-    public Spline_interp(final double[] xv, final double[] yv, final double yp1) throws NRException {
+    public SplineInterpolation(final double[] xv, final double[] yv, final double yp1) throws NRException {
         this(xv, yv, yp1, 1.e99);
     }
 
-    public Spline_interp(final double[] xv, final double[] yv, final double yp1, final double ypn) throws NRException {
+    public SplineInterpolation(final double[] xv, final double[] yv, final double yp1, final double ypn) throws NRException {
         super(xv, $_(yv, 0), 2);
         y2 = doub_vec(xv.length);
         sety2(xv, yv, yp1, ypn);
@@ -37,16 +37,17 @@ public class Spline_interp extends Base_interp {
     // yv_arr, final int yv_off, double yp1, double ypn);
     // Doub rawinterp(Int jl, Doub xv);
 
-    // For now, you can ignore the second constructor; it will be used later
-    // for two-dimensional spline interpolation. The user interface differs
-    // from previous ones only in the addition of two constructor arguments,
-    // used to set the values of the first derivatives at the endpoints, y00
-    // and y0 N1. These are coded with default values that signal that you
-    // want a natural spline, so they can be omitted in most situations. Both
-    // constructors invoke sety2 to do the actual work of computing, and
-    // storing, the second derivatives.
-
-    public void sety2(final double[] xv,  final double[] yv, 
+    /**
+     * For now, you can ignore the second constructor; it will be used later
+     * for two-dimensional spline interpolation. The user interface differs
+     * from previous ones only in the addition of two constructor arguments,
+     * used to set the values of the first derivatives at the endpoints, y[0][0]
+     * and y[0][N - 1]. These are coded with default values that signal that you
+     * want a natural spline, so they can be omitted in most situations. Both
+     * constructors invoke sety2 to do the actual work of computing, and
+     * storing, the second derivatives.
+     */
+    public void sety2(final double[] xv,  final double[] yv,
             final double yp1, final double ypn) throws NRException {
         // This routine stores an array y2[0..n-1] with second derivatives of
         // the interpolating function at the tabulated points pointed to by xv,
@@ -99,15 +100,16 @@ public class Spline_interp extends Base_interp {
             y2[k] = y2[k] * y2[k + 1] + u[k]; // algorithm.
     }
 
-    // Note that, unlike the previous object Poly_interp, Spline_interp stores
-    // data that depend on the contents of your array of yi 's at its time of
-    // creation ' a whole vector y2. Although we didn't point it out, the
-    // previous interpolation object actually allowed the misuse of altering
-    // the contents of their x and y arrays on the fly (as long as the lengths
-    // didn't change). If you do that with Spline_interp, you'll get definitely
-    // wrong answers! The required rawinterp method, never called directly by
-    // the users, uses the stored y2 and implements equation (3.3.3):
-
+    /**
+     * Note that, unlike the previous object Poly_interp, Spline_interp stores
+     * data that depend on the contents of your array of yi 's at its time of
+     * creation ' a whole vector y2. Although we didn't point it out, the
+     * previous interpolation object actually allowed the misuse of altering
+     * the contents of their x and y arrays on the fly (as long as the lengths
+     * didn't change). If you do that with Spline_interp, you'll get definitely
+     * wrong answers! The required rawinterp method, never called directly by
+     * the users, uses the stored y2 and implements equation (3.3.3):
+     */
     public double rawinterp(final int jl, final double x) throws NRException {
         // Given a value x, and using pointers to data xx and yy, and the
         // stored vector of second derivatives y2, this routine returns the
@@ -116,10 +118,10 @@ public class Spline_interp extends Base_interp {
         int klo = jl, khi = jl + 1;
         double y, h, b, a;
         h = xx.$_(khi) - xx.$_(klo);
+        // The xa's must be distinct.
         if (h == 0.0)
-            throw new NRException("Bad input to routine splint"); // The xa's
-                                                                  // must be dis
-        a = (xx.$_(khi) - x) / h; // tinct.
+            throw new NRException("Bad input to routine splint");
+        a = (xx.$_(khi) - x) / h;
         b = (x - xx.$_(klo)) / h; // Cubic spline polynomial is now
                                             // evaluated.
         y = a * yy.$_(klo) + b * yy.$_(khi) + 

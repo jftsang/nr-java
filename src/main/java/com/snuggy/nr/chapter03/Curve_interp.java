@@ -14,7 +14,7 @@ public class Curve_interp {
     private final double[][] pts;
     private final double[] s;
     private final double[] ans;
-    private Spline_interp[] srp;
+    private SplineInterpolation[] srp;
 
     public Curve_interp(final double[][] ptsin) throws NRException, InstantiationException, IllegalAccessException {
         this(ptsin, false);
@@ -34,7 +34,7 @@ public class Curve_interp {
         pts = doub_mat(dim, in);
         s = doub_vec(in);
         ans = doub_vec(dim);
-        srp = obj_vec_nulls(Spline_interp.class, dim);
+        srp = obj_vec_nulls(SplineInterpolation.class, dim);
 
         int i, ii, im, j, ofs;
         double ss, soff, db, de;
@@ -65,7 +65,7 @@ public class Curve_interp {
                                     // derivatives.
             db = in < 4 ? 1.e99 : fprime(s, 0, pts[j], 0, 1);
             de = in < 4 ? 1.e99 : fprime(s, in - 1, pts[j], in - 1, -1);
-            srp[j] = new Spline_interp(s, pts[j], db, de);
+            srp[j] = new SplineInterpolation(s, pts[j], db, de);
         }
     }
 

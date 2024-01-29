@@ -17,7 +17,7 @@ public class Poly2D_interp {
     protected int m, n, mm, nn;
     protected final double[][] y;
     protected final double[] yv;
-    protected Poly_interp x1terp, x2terp;
+    protected PolyInterpolation x1terp, x2terp;
 
     public Poly2D_interp(final double[] x1v, final double[] x2v, final double[][] ym, final int mp, final int np) {
         m = (x1v.length);
@@ -26,8 +26,8 @@ public class Poly2D_interp {
         nn = (np);
         y = doub_mat(ym);
         yv = doub_vec(m);
-        x1terp = new Poly_interp(x1v, yv, mm);
-        x2terp = new Poly_interp(x2v, x2v, nn);
+        x1terp = new PolyInterpolation(x1v, yv, mm);
+        x2terp = new PolyInterpolation(x2v, x2v, nn);
     }
 
     // Dummy 1-dim interpolations for their

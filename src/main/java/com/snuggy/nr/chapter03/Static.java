@@ -12,12 +12,8 @@ public class Static {
 
     public static void polcoe(final double[] x, final double[] y, final double[] cof) {
         // Given arrays x[0..n-1] and y[0..n-1] containing a tabulated
-        // function yi D f.xi /, this routine returns an array of coefficients
-        // cof[0..n-1], such that yi D
-        // Pn1
-        // jD0 cofj x
-        // j
-        // i .
+        // function yi = f(xi), this routine returns an array of coefficients
+        // cof[0..n-1], such that yi = Pn-1 j = 0 cofj x j i .
 
         int k, j, i, n = x.length;
         double phi, ff, b;
@@ -25,24 +21,22 @@ public class Static {
         for (i = 0; i < n; i++)
             s[i] = cof[i] = 0.0;
         s[n - 1] = -x[0];
-        for (i = 1; i < n; i++) { // Coefficients si of the master polynomial
-                                  // P.x/ are
+        for (i = 1; i < n; i++) {
+            // Coefficients si of the master polynomial P(x) are found by recurrence.
             for (j = n - 1 - i; j < n - 1; j++)
-                // found by recurrence.
                 s[j] -= x[i] * s[j + 1];
             s[n - 1] -= x[i];
         }
         for (j = 0; j < n; j++) {
             phi = n;
             for (k = n - 1; k > 0; k--)
-                // The quantity phi D
-                // Q
-                // j'k.xj  xk/ is found as a
-                phi = k * s[k] + x[j] * phi; // derivative of P.xj /.
+                // The quantity phi = Q j'k(xj - xk) is found as a derivative of P(xj).
+                phi = k * s[k] + x[j] * phi;
             ff = y[j] / phi;
-            b = 1.0; // Coefficients of polynomials in each term of the
+            b = 1.0;
+            // Coefficients of polynomials in each term of the
             // Lagrange formula are found by synthetic division of
-            // P.x/ by .x  xj /. The solution ck is accumulated.
+            // P(x) by (x - xj). The solution ck is accumulated.
             for (k = n - 1; k >= 0; k--) {
                 cof[k] += b * ff;
                 b = s[k] + x[j] * b;
@@ -53,12 +47,8 @@ public class Static {
     public static void polcof(final double[] xa, final double[] ya, final double[] cof) 
             throws NRException {
         // Given arrays xa[0..n-1] and ya[0..n-1] containing a tabulated
-        // function yai D f.xai /, this routine returns an array of
-        // coefficients cof[0..n-1], such that yai D
-        // Pn1
-        // jD0 cofj xa
-        // j
-        // i .
+        // function ya_i = f(xa_i), this routine returns an array of
+        // coefficients cof[0..n-1], such that yai = Pn(x) = sum cof[j] xa_i ^j
 
         int k, j, i, n = xa.length;
         double xmin;
@@ -75,7 +65,7 @@ public class Static {
                 x_t[k] = x[k];
                 y_t[k] = y[k];
             }
-            Poly_interp interp = new Poly_interp(x, y, n - j);
+            PolyInterpolation interp = new PolyInterpolation(x, y, n - j);
             cof[j] = interp.rawinterp(0, 0.); // Extrapolate to x D 0.
             xmin = 1.0e99;
             k = -1;

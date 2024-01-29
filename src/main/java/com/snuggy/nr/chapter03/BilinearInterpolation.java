@@ -5,7 +5,7 @@ import static com.snuggy.nr.util.Static.*;
 
 import com.snuggy.nr.util.*;
 
-public class Bilin_interp {
+public class BilinearInterpolation {
 
     // Object for bilinear interpolation on a matrix. Construct with a
     // vector of x1 values, a vector of x2 values, and a matrix of tabulated
@@ -13,14 +13,14 @@ public class Bilin_interp {
 
     protected int m, n;
     protected final double[][] y;
-    protected Linear_interp x1terp, x2terp;
+    protected LinearInterpolation x1terp, x2terp;
 
-    public Bilin_interp(final double[] x1v, final double[] x2v, final double[][] ym) {
+    public BilinearInterpolation(final double[] x1v, final double[] x2v, final double[][] ym) {
         m = (x1v.length);
         n = (x2v.length);
         y = doub_mat(ym);
-        x1terp = new Linear_interp(x1v, x1v);
-        x2terp = new Linear_interp(x2v, x2v);
+        x1terp = new LinearInterpolation(x1v, x1v);
+        x2terp = new LinearInterpolation(x2v, x2v);
     } // Construct dummy 1-dim interpolations
       // for their locate and hunt
 

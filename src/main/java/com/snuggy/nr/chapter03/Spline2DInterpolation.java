@@ -7,7 +7,7 @@ import java.util.*;
 
 import com.snuggy.nr.util.*;
 
-public class Spline2D_interp {
+public class Spline2DInterpolation {
 
     // Object for two-dimensional cubic spline interpolation on a matrix.
     // Construct with a vector of x1 values, a vector of x2 values, and a
@@ -17,17 +17,17 @@ public class Spline2D_interp {
     protected final double[][] y;
     protected final double[] x1;
     protected final double[] yv;
-    protected List<Spline_interp> srp;
+    protected List<SplineInterpolation> srp;
 
-    public Spline2D_interp(final double[] x1v, final double[] x2v, final double[][] ym) throws NRException {
+    public Spline2DInterpolation(final double[] x1v, final double[] x2v, final double[][] ym) throws NRException {
         m = (x1v.length);
         n = (x2v.length);
         y = doub_mat(ym);
         yv = doub_vec(m);
         x1 = (x1v);
-        srp = new ArrayList<Spline_interp>();
+        srp = new ArrayList<SplineInterpolation>();
         for (int i = 0; i < m; i++)
-            srp.add(new Spline_interp(x2v, y[i]));
+            srp.add(new SplineInterpolation(x2v, y[i]));
         // Save an array of pointers to 1-dim row splines.
     }
 
@@ -39,8 +39,8 @@ public class Spline2D_interp {
         for (int i = 0; i < m; i++)
             yv[i] = srp.get(i).interp(x2p);
         // Interpolate on each row.
-        Spline_interp scol = 
-            new Spline_interp(x1, yv); // Construct the column
+        SplineInterpolation scol =
+            new SplineInterpolation(x1, yv); // Construct the column
                                           // spline,
         return scol.interp(x1p); // and evaluate it.
     }

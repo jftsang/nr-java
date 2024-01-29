@@ -8,7 +8,7 @@ import static java.lang.Math.*;
 import com.snuggy.nr.refs.*;
 import com.snuggy.nr.util.*;
 
-public abstract class Base_interp {
+public abstract class BaseInterpolation {
 
     // Abstract base class used by all interpolation routines in this chapter.
     // Only the routine interp is called directly by the user.
@@ -19,13 +19,13 @@ public abstract class Base_interp {
     protected int yy_off;
     protected int cor, jsav;
     
-    public Base_interp() {
+    public BaseInterpolation() {
 	    n = 0; mm = 0; dj = 0;
 	    xx = null;
 	    yy = null;
     }
 
-    public Base_interp(final double[] x, final $double y, final int m) {
+    public BaseInterpolation(final double[] x, final $double y, final int m) {
         // Constructor: Set up for interpolating on a table of x's and y's
         // of length m. Normally called by a derived class, not by the user.
         n = (x.length);
@@ -45,20 +45,20 @@ public abstract class Base_interp {
         return rawinterp(jlo, x);
     }
 
-    // Int locate(final double x); See definitions below.
-    // Int hunt(final double x);
-
+    /**
+     * Derived classes provide this as the actual interpolation method.
+     */
     public abstract double rawinterp(final int jlo, final double x) throws NRException;
 
-    // Derived classes provide this as the actual interpolation method.
 
+    /**
+     * Given a value x, return a value j such that x is (insofar as
+     * possible) centered in the subrange xx[j..j+mm-1], where xx is
+     * the stored pointer. The values in xx must be monotonic, either
+     * increasing or decreasing. The returned value is not less than 0,
+     * nor greater than n-1.
+     */
     public int locate(final double x) throws NRException {
-        // Given a value x, return a value j such that x is (insofar as
-        // possible) centered in the subrange xx[j..j+mm-1], where xx is
-        // the stored pointer. The values in xx must be monotonic, either
-        // increasing or decreasing. The returned value is not less than 0,
-        // nor greater than n-1.
-
         int ju, jm, jl;
         if (n < 2 || mm < 2 || mm > n)
             throw new NRException("locate size error");

@@ -6,7 +6,7 @@ import static com.snuggy.nr.util.Static.*;
 
 import com.snuggy.nr.util.*;
 
-public class BaryRat_interp extends Base_interp {
+public class BarycentricRationalInterpolation extends BaseInterpolation {
 
     // Barycentric rational interpolation object. After constructing the
     // object, call interp for interpolated values. Note that no error
@@ -15,11 +15,7 @@ public class BaryRat_interp extends Base_interp {
     private final double[] w;
     private int d;
 
-    // BaryRat_interp(VecDoub_I &xv, VecDoub_I &yv, Int dd);
-    // Doub rawinterp(Int jl, Doub x);
-    // Doub interp(Doub x);
-
-    public BaryRat_interp(final double[] xv, final double[] yv, final int dd) throws NRException {
+    public BarycentricRationalInterpolation(final double[] xv, final double[] yv, final int dd) throws NRException {
         // Constructor arguments are x and y vectors of length n, and order d of
         // desired approximation.
         super(xv, $_(yv, 0), xv.length);
@@ -27,7 +23,7 @@ public class BaryRat_interp extends Base_interp {
         d = (dd);
 
         if (n <= d)
-            throw new NRException("d too large for number of points in BaryRat_interp");
+            throw new NRException("d too large for number of points in BarycentricRationalInterpolation");
         for (int k = 0; k < n; k++) { // Compute weights from equation (3.4.10).
             int imin = MAX(k - d, 0);
             int imax = k >= n - d ? n - d - 1 : k;

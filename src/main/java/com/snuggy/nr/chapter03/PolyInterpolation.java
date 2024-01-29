@@ -8,11 +8,13 @@ import static java.lang.Math.*;
 import com.snuggy.nr.refs.*;
 import com.snuggy.nr.util.*;
 
-public class Poly_interp extends Base_interp {
+/**
+ * Polynomial interpolation object. Construct with x and y vectors,
+ * and the number M of points to be used locally (polynomial order plus
+ * one), then call interp for interpolated values.
+ */
+public class PolyInterpolation extends BaseInterpolation {
 
-    // Polynomial interpolation object. Construct with x and y vectors,
-    // and the number M of points to be used locally (polynomial order plus
-    // one), then call interp for interpolated values.
 
     protected double dy;
     
@@ -20,12 +22,10 @@ public class Poly_interp extends Base_interp {
         return dy;
     }
 
-    public Poly_interp(final double[] xv, final double[] yv, final int m) {
+    public PolyInterpolation(final double[] xv, final double[] yv, final int m) {
         super(xv, $_(yv, 0), m);
         dy = (0.0);
     }
-
-    // public double rawinterp(int jl, double x)
 
     public double rawinterp(final int jl, final double x) throws NRException {
         // Given a value x, and using pointers to data xx and yy, this routine

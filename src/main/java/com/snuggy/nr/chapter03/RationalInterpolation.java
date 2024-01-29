@@ -8,7 +8,7 @@ import static java.lang.Math.*;
 import com.snuggy.nr.refs.*;
 import com.snuggy.nr.util.*;
 
-public class Rat_interp extends Base_interp {
+public class RationalInterpolation extends BaseInterpolation {
 
     // Diagonal rational function interpolation object. Construct with x and
     // y vectors, and the number m of points to be used locally, then call
@@ -16,7 +16,7 @@ public class Rat_interp extends Base_interp {
 
     protected double dy;
 
-    public Rat_interp(final double[] xv, final double[] yv, final int m) {
+    public RationalInterpolation(final double[] xv, final double[] yv, final int m) {
         super(xv, $_(yv, 0), m);
         dy = (0.0);
     }

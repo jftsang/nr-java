@@ -5,12 +5,12 @@ import static com.snuggy.nr.refs.Refs.*;
 
 import com.snuggy.nr.util.*;
 
-public class Linear_interp extends Base_interp {
+public class LinearInterpolation extends BaseInterpolation {
 
     // Piecewise linear interpolation object. Construct with x and y vectors,
     // then call interp for interpolated values.
 
-    public Linear_interp(final double[] xv, final double[] yv) {
+    public LinearInterpolation(final double[] xv, final double[] yv) {
         super(xv, $_(yv, 0), 2);
     }
 

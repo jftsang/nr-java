@@ -6,6 +6,7 @@ import static java.lang.Math.*;
 import java.lang.reflect.*;
 
 import com.snuggy.nr.refs.*;
+import java.util.Arrays;
 
 public class Static {
 
@@ -139,8 +140,7 @@ public class Static {
 
     public static double[] doub_vec(int n, double x) {
         final double[] r = new double[n];
-        for (int i = 0; i < n; i++)
-            r[i] = x;
+        Arrays.fill(r, x);
         return r;
     }
 
@@ -168,7 +168,7 @@ public class Static {
     }
 
     public static double Doub(int x) {
-        return (double) x;
+        return x;
     }
 
     public static int Int(double x) {
@@ -257,8 +257,7 @@ public class Static {
 
     public static int[] int_vec(final int n, final int x) {
         final int[] r = new int[n];
-        for (int i = 0; i < n; i++)
-            r[i] = x;
+        Arrays.fill(r, x);
         return r;
     }
 

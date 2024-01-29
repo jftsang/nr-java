@@ -14,9 +14,10 @@ public class Laplace_interp extends Linbcg {
     // equation. Call constructor once, then solve one or more times (see text).
 
     private final double[][] mat;
-    private int ii, jj;
-    private int nn;
-    private $int iter;
+    private final int ii;
+    private final int jj;
+    private final int nn;
+    private final $int iter;
     private final double[] b, mask;
     private final double[] y;
 
@@ -80,9 +81,8 @@ public class Laplace_interp extends Linbcg {
     @Override
     public void asolve(final double[] b, final double[] x, final int itrnsp) {
         // Diagonal preconditioner. (Diagonal elements all unity.)
-        int i, n = b.length;
-        for (i = 0; i < n; i++)
-            x[i] = b[i];
+        int n = b.length;
+        System.arraycopy(b, 0, x, 0, n);
     }
 
     @Override

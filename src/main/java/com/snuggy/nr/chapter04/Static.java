@@ -78,7 +78,7 @@ public class Static {
                                                               // successive
                                                               // trapezoidal
                                                               // approxi
-        Poly_interp polint = new Poly_interp(h, s, K); // mations and their
+        PolyInterpolation polint = new PolyInterpolation(h, s, K); // mations and their
                                                        // relative stepsizes.
         h[0] = 1.0;
         Trapzd<T> t = new Trapzd<T>(func, a, b);
@@ -113,7 +113,7 @@ public class Static {
         // constants below have the same meanings as in qromb.
         final int JMAX = 14, JMAXP = JMAX + 1, K = 5;
         final double[] h = doub_vec(JMAXP), s = doub_vec(JMAX);
-        Poly_interp polint = new Poly_interp(h, s, K);
+        PolyInterpolation polint = new PolyInterpolation(h, s, K);
         h[0] = 1.0;
         for (int j = 1; j <= JMAX; j++) {
             s[j - 1] = q.next();

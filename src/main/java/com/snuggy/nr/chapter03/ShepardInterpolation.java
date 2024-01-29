@@ -6,7 +6,7 @@ import static java.lang.Math.*;
 
 import com.snuggy.nr.util.*;
 
-public class Shep_interp {
+public class ShepardInterpolation {
 
     // Object for Shepard interpolation using n points in dim dimensions.
     // Call constructor once, then interp as many times as desired.
@@ -16,11 +16,11 @@ public class Shep_interp {
     private final double[] vals;
     private double pneg;
 
-    public Shep_interp(final double[][] ptss, final double[] valss) {
+    public ShepardInterpolation(final double[][] ptss, final double[] valss) {
         this(ptss, valss, 2.0);
     }
 
-    public Shep_interp(final double[][] ptss, final double[] valss, final double p) {
+    public ShepardInterpolation(final double[][] ptss, final double[] valss, final double p) {
         dim = (ncols(ptss));
         n = (nrows(ptss));
         pts = (ptss);
