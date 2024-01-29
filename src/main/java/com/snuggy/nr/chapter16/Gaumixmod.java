@@ -15,7 +15,7 @@ public class Gaumixmod extends preGaumixmod {
     private final double[][] data, means, resp; // Local copies of xn's, k's, and the
                                           // pnk's.
     private final double[] frac, lndets; // P.k/'s and log det'k's.
-    private final double[][] sig_arr[]; // 'k's
+    private final double[][][] sig_arr; // 'k's
     private double loglike; // logL.
     
     public final double[][][] sig_arr() {

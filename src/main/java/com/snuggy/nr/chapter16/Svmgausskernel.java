@@ -19,7 +19,7 @@ public class Svmgausskernel extends Svmgenkernel {
         fill();
     }
 
-    public double kernel(final double xi_arr[], final int xi_off, final double xj_arr[], final int xj_off) {
+    public double kernel(final double[] xi_arr, final int xi_off, final double[] xj_arr, final int xj_off) {
         double dott = 0.;
         for (int k = 0; k < n; k++)
             dott += SQR(xi_arr[xi_off + k] - xj_arr[xj_off + k]);

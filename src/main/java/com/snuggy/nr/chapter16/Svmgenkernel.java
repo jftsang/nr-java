@@ -27,9 +27,9 @@ public abstract class Svmgenkernel {
         return ker;
     }
     
-    public abstract double kernel(final double xi_arr[], final int xi_off, final double xj_arr[], final int xj_off);
+    public abstract double kernel(final double[] xi_arr, final int xi_off, final double[] xj_arr, final int xj_off);
 
-    public double kernel(final int i, final double xj_arr[], final int xj_off) {
+    public double kernel(final int i, final double[] xj_arr, final int xj_off) {
         return kernel(data[i], 0, xj_arr, xj_off);
     }
 

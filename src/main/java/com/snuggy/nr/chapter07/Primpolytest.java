@@ -20,7 +20,7 @@ public class Primpolytest {
         t = int_vec(N * N);
         a = int_vec(N * N);
         p = int_vec(N * N);
-        long factordata[] = { 3, 5, 17, 257, 65537 };
+        long[] factordata = { 3, 5, 17, 257, 65537 };
         for (int i = 0; i < nfactors; i++)
             factors[i] = factordata[i];
     }

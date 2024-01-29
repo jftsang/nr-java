@@ -514,7 +514,7 @@ public class Static {
     }
 
     // static final double frac[MR+1]=
-    static final double frac[] = { 0.0, 0.5, 0.25, 0.75, 0.13, 0.38, 0.62, 0.88, 1.0 };
+    static final double[] frac = { 0.0, 0.5, 0.25, 0.75, 0.13, 0.38, 0.62, 0.88, 1.0 };
 
     public static void laguer(final Complex[] a, final $<Complex> x, final $int its) throws NRException {
         // Given the m+1 complex coefficients a[0..m] of the polynomial

@@ -29,7 +29,7 @@ public class Stochsim {
 
     // typedef Doub(Stochsim::*rateptr)(); Obscure C++ used to create a vector
     // dispatch of function pointers to the rate functions.
-    private Func_Void_To_Doub dispatch_arr[];
+    private Func_Void_To_Doub[] dispatch_arr;
     private int dispatch_off;
     @SuppressWarnings("unused")
     private int rateptr_off;
@@ -60,10 +60,10 @@ public class Stochsim {
         k0 = 0.01;
         k1 = .1;
         k2 = 1.;
-        double indat[] = { // The reactant matrix ij .
+        double[] indat = { // The reactant matrix ij .
         1., 0., 0., 1., 1., 0., 0., 1., 1., 0., 0., 0. };
         instate = doub_mat(nn, mm, indat);
-        double outdat[] = { // The state change matrix ij .
+        double[] outdat = { // The state change matrix ij .
         -1., 0., 0., 1., -1., 0., 0., 1., -1., 0., 0., 1. };
         outstate = doub_mat(nn, mm, outdat);
         // dispatch[0] = &Stochsim::rate0; // You must also point the dispatch

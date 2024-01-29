@@ -331,9 +331,9 @@ public class Refs {
     }
 	
     static class Double1DByValueFromArrayElement implements $$double1d {
-        private final double[] arr[];
+        private final double[][] arr;
         private final int off;
-        public Double1DByValueFromArrayElement(final double[] arr[], final int off) {
+        public Double1DByValueFromArrayElement(final double[][] arr, final int off) {
             this.arr = arr;
             this.off = off;
         }

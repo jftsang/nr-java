@@ -80,7 +80,14 @@ public class Fitexy {
                                                                // it to
         int j; // our variables.
         $double varx = $(0.0), vary = $(0.0), d1 = $(0.0), d2 = $(0.0), dum1 = $(0.0);
-        double amx, amn, ang[] = new double[7], ch[] = new double[7], scale, bmn, bmx, r2;
+        double amx;
+        double amn;
+        double[] ang = new double[7];
+        double[] ch = new double[7];
+        double scale;
+        double bmn;
+        double bmx;
+        double r2;
         avevar(x, dum1, varx); // Find the x and y variances, and scale
         // the data into the global variables for communication with the
         // function chixy.
@@ -154,7 +161,7 @@ public class Fitexy {
         b = tan(b) / scale;
     }
 
-    public void SWAP(double x[], double y[]) {
+    public void SWAP(double[] x, double[] y) {
         double t = x[0];
         x[0] = y[0];
         y[0] = t;

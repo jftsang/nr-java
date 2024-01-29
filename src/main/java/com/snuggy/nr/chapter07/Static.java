@@ -10,8 +10,8 @@ import com.snuggy.nr.util.*;
 
 public class Static {
 
-    private static final long c1[] = { 0xbaa96887L, 0x1e17d32cL, 0x03bcdc3cL, 0x0f33d1b2L };
-    private static final long c2[] = { 0x4b0f3b58L, 0xe874f0c3L, 0x6955c5a6L, 0x55a7ca46L };
+    private static final long[] c1 = { 0xbaa96887L, 0x1e17d32cL, 0x03bcdc3cL, 0x0f33d1b2L };
+    private static final long[] c2 = { 0x4b0f3b58L, 0xe874f0c3L, 0x6955c5a6L, 0x55a7ca46L };
 
     public static void psdes(final $int lword, final $int rword) {
         // Pseudo-DES hashing of the 64-bit word (lword,rword). Both 32-bit
@@ -111,7 +111,7 @@ public class Static {
     }
 
     private static final int MAXBIT = 30, MAXDIM = 6;
-    private static int mdeg[] = { 1, 2, 3, 3, 4, 4 };
+    private static int[] mdeg = { 1, 2, 3, 3, 4, 4 };
     private static int in;
     private static final int[] ix = int_vec(MAXDIM);
     // private static NRvector<Uint*> iu(MAXBIT);

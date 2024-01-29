@@ -118,7 +118,7 @@ public class Svm {
         return sum;
     }
 
-    public double predict(final double x_arr[], final int x_off) {
+    public double predict(final double[] x_arr, final int x_off) {
         // Call only after convergence via repeated calls to relax. Returns
         // the decision rule f.x/ for an arbitrary feature vector.
         double sum = 0.;

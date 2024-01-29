@@ -25,7 +25,7 @@ public class Adapt {
     private final double x1 = 0.942882415695480;
     private final double x2 = 0.641853342345781;
     private final double x3 = 0.236383199662150;
-    private final double x[] = { 0, -x1, -alpha, -x2, -beta, -x3, 0.0, x3, beta, x2, alpha, x1 };
+    private final double[] x = { 0, -x1, -alpha, -x2, -beta, -x3, 0.0, x3, beta, x2, alpha, x1 };
 
     // Adapt(Doub tol);
     // template <class T>

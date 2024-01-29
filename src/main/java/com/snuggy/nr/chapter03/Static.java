@@ -84,7 +84,7 @@ public class Static {
         }
     }
 
-    private static int wt_d[] = { 
+    private static int[] wt_d = {
         1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0,
         0, 0, 0, 0, -3, 0, 0, 3, 0, 0, 0, 0, -2,  0,  0,  -1, 
