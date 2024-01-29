@@ -38,8 +38,8 @@ public class Multinormaldev extends Ran {
         for (i = 0; i < mm; i++) { // Fill a vector of independent normal
                                    // deviates.
             do {
-                u = doub();
-                v = 1.7156 * (doub() - 0.5);
+                u = getAsDouble();
+                v = 1.7156 * (getAsDouble() - 0.5);
                 x = u - 0.449871;
                 y = abs(v) + 0.386595;
                 q = SQR(x) + y * (0.19600 * y - 0.25472 * x);

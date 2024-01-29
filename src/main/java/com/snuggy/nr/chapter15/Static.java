@@ -95,7 +95,7 @@ public class Static {
             propose.func(s.$(), sprop, qratio);
             alph = min(1., qratio.$() * exp(plog.func(sprop) - s.$().plog())); // Equation
                                                                                      // (15.8.5).
-            ran = propose.gau().doub();
+            ran = propose.gau().dev();
             if (ran < alph) { // Accept the candidate.
                 $$(s, sprop);
                 plog.func(s.$());

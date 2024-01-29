@@ -17,7 +17,7 @@ public class Ranfib {
         inextp = (31);
         Ranq1 init = new Ranq1(j);
         for (int k = 0; k < 55; k++)
-            dtab[k] = init.doub();
+            dtab[k] = init.getAsDouble();
     }
 
     public double doub() {

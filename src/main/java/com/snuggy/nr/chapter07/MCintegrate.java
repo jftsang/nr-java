@@ -66,7 +66,7 @@ public class MCintegrate {
         int i, j;
         for (i = 0; i < nstep; i++) {
             for (j = 0; j < ndim; j++)
-                x[j] = xlo.$()[j] + (xhi.$()[j] - xlo.$()[j]) * ran.doub();
+                x[j] = xlo.$()[j] + (xhi.$()[j] - xlo.$()[j]) * ran.getAsDouble();
             if (xmapp != null)
                 $$(xx, xmapp.eval(x));
             else

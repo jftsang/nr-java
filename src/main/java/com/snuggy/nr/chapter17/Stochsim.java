@@ -141,8 +141,8 @@ public class Stochsim {
             return t;
         } // Rare: All reactions have stopped
         // exactly, so double the time until the user notices!
-        tau = -log(ran.doub()) / asum;
-        atarg = ran.doub() * asum;
+        tau = -log(ran.getAsDouble()) / asum;
+        atarg = ran.getAsDouble() * asum;
         sum = a[pr[0]];
         while (sum < atarg)
             sum += a[pr[++k]]; // Equation (17.7.7).

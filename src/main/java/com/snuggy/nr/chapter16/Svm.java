@@ -52,7 +52,7 @@ public class Svm {
                 break;
         for (j = fnz; j < m - 2; j++) { // Randomly permute all the nonzero ?'s.
             //k = j + (ran.int32() % (m - j));
-            k = j + umod(ran.int32(), (m - j));
+            k = j + umod(ran.getAsInt(), (m - j));
             SWAP(x.indx(), j, k);
         }
         for (jj = 0; jj < m; jj++) { // Main loop over ?'s.
@@ -76,7 +76,7 @@ public class Svm {
             if (alph.$()[y.indx()[fub]] == lambda)
                 break;
         for (j = fnz; j < fub - 2; j++) { // Permute.
-            k = j + umod(ran.int32(), (fub - j));
+            k = j + umod(ran.getAsInt(), (fub - j));
             SWAP(y.indx(), j, k);
         }
         for (jj = fnz; jj < fub; jj++) { // Compute sums over pinned ?'s just

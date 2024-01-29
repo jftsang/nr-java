@@ -328,7 +328,7 @@ public class Static {
                 for (k = 0; k < npg; k++) {
                     wgt = xjac;
                     for (j = 0; j < ndim; j++) {
-                        xn = (kg[j] - ran_vegas.doub()) * dxg + 1.0;
+                        xn = (kg[j] - ran_vegas.getAsDouble()) * dxg + 1.0;
                         ia[j] = MAX(MIN(Int(xn), NDMX), 1);
                         if (ia[j] > 1) {
                             xo = xi[j][ia[j] - 1] - xi[j][ia[j] - 2];
@@ -573,7 +573,7 @@ public class Static {
         // region. Used by miser.
         int j, n = pt.length;
         for (j = 0; j < n; j++)
-            pt[j] = regn[j] + (regn[n + j] - regn[j]) * ran.doub();
+            pt[j] = regn[j] + (regn[n + j] - regn[j]) * ran.getAsDouble();
     }
 
 }

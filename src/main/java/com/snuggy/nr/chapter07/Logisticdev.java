@@ -20,7 +20,7 @@ public class Logisticdev extends Ran {
         // Return a logistic deviate.
         double u;
         do
-            u = doub();
+            u = getAsDouble();
         while (u * (1. - u) == 0.);
         return mu + 0.551328895421792050 * sig * log(u / (1. - u));
     }

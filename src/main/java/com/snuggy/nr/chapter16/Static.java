@@ -43,7 +43,7 @@ public class Static {
         j = istart; // The current state is kept in j.
         out[0] = j;
         for (ii = 1; ii < n; ii++) { // Main loop.
-            r = ran.doub() / cum[j][m - 1]; // Slightly-off normalization gets
+            r = ran.getAsDouble() / cum[j][m - 1]; // Slightly-off normalization gets
                                             // corrected here.
             ilo = 0;
             ihi = m;

@@ -35,7 +35,7 @@ public class Poissondev extends Ran {
             t = 1.;
             do {
                 ++k;
-                t *= doub();
+                t *= getAsDouble();
             } while (t > lamexp);
         } else { // Will use ratio-of-uniforms method.
             if (lambda != lambold) {
@@ -43,8 +43,8 @@ public class Poissondev extends Ran {
                 loglam = log(lambda);
             }
             for (;;) {
-                u = 0.64 * doub();
-                v = -0.68 + 1.28 * doub();
+                u = 0.64 * getAsDouble();
+                v = -0.68 + 1.28 * getAsDouble();
                 if (lambda > 13.5) { // Outer squeeze for fast rejection.
                     v2 = SQR(v);
                     if (v >= 0.) {

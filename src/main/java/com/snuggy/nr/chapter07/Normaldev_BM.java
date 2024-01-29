@@ -23,9 +23,9 @@ public class Normaldev_BM extends Ran {
         double v1, v2, rsq, fac;
         if (storedval == 0.) { // We don't have an extra deviate handy, so
             do {
-                v1 = 2.0 * doub() - 1.0; // pick two uniform numbers in the
+                v1 = 2.0 * getAsDouble() - 1.0; // pick two uniform numbers in the
                                          // square ex
-                v2 = 2.0 * doub() - 1.0; // tending from -1 to +1 in each
+                v2 = 2.0 * getAsDouble() - 1.0; // tending from -1 to +1 in each
                                          // direction,
                 rsq = v1 * v1 + v2 * v2; // see if they are in the unit circle,
             } while (rsq >= 1.0 || rsq == 0.0); // or try again.

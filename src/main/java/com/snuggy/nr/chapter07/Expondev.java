@@ -19,7 +19,7 @@ public class Expondev extends Ran {
         // Return an exponential deviate.
         double u;
         do
-            u = doub();
+            u = getAsDouble();
         while (u == 0.);
         return -log(u) / beta;
     }
