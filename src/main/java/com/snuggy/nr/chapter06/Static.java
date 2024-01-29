@@ -842,7 +842,7 @@ public class Static {
             fac = (times(fac, times(divide(1.0, n), z)));
             // series = temp + fac;
             $$(series, plus(temp, fac));
-            if (equal(series.$(), temp))
+            if (series.$().equals(temp))
                 return;
             // temp = series;
             temp = complex(series.$());

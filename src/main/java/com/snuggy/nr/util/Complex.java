@@ -4,6 +4,7 @@ package com.snuggy.nr.util;
 import static java.lang.Math.*;
 
 import com.snuggy.nr.refs.*;
+import java.util.Objects;
 
 public class Complex implements ByValue<Complex> {
     
@@ -19,8 +20,15 @@ public class Complex implements ByValue<Complex> {
         this.imag = imag;
     }
     
-    public static boolean equal(Complex x, Complex y) {
-        return x.real == y.real && x.imag == y.imag;
+    public boolean equals(Complex other) {
+        return real == other.real && imag == other.imag;
+    }
+
+    public int hashCode() {
+        int result = 17;
+        result = 31 * result + Objects.hashCode(real);
+        result = 31 * result + Objects.hashCode(imag);
+        return result;
     }
     
     public static double norm2(Complex x) {

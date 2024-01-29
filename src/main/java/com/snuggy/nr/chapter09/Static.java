@@ -573,7 +573,7 @@ public class Static {
             $$(dx, MAX(abp, abm) > 0.0 ? divide(Doub(m), gp.$()) : polar(1 + abx, Doub(iter)));
             // x1=x-dx;
             $$(x1, minus(x.$(), dx.$()));
-            if (equal(x.$(), x1.$()))
+            if (x.$().equals(x1.$()))
                 return; // Converged.
             if (iter % MT != 0)
                 x.$(x1.$$());
